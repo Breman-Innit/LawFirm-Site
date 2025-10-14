@@ -1,17 +1,16 @@
 //add scroll effect to nav bar
-
 window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.padding = '1rem 5%';
-                nav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            } else {
-                nav.style.padding = '1.5rem 5%';
-                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-            }
-        });
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+        nav.style.padding = '1rem 5%';
+        nav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+    } else {
+        nav.style.padding = '1.5rem 5%';
+        nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+    }
+});
 
-   // Counter animation function
+// Counter animation function
 function animateCounter(counter) {
     const target = +counter.getAttribute('data-target');
     let current = 0;
@@ -35,10 +34,24 @@ function animateCounter(counter) {
     }, 16);
 }
 
-// Scroll detection
+// Fade in on scroll function
+function fadeInOnScroll() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('visible');
+        }
+    });
+}
+
+// Scroll detection for counters
 let countersAnimated = false;
 
-function checkIfInView() {
+function checkCountersInView() {
     const statsSection = document.querySelector('.stats');
     const sectionTop = statsSection.getBoundingClientRect().top;
     const windowHeight = window.innerHeight;
@@ -52,14 +65,17 @@ function checkIfInView() {
         counters.forEach(counter => {
             animateCounter(counter);
         });
-        
-        // Remove scroll listener after animation starts
-        window.removeEventListener('scroll', checkIfInView);
     }
 }
 
-// Add scroll event listener
-window.addEventListener('scroll', checkIfInView);
+// Combined scroll event listener
+window.addEventListener('scroll', () => {
+    fadeInOnScroll();
+    checkCountersInView();
+});
 
-// Also check on page load in case section is already visible
-window.addEventListener('load', checkIfInView);
+// Also trigger on page load
+window.addEventListener('load', () => {
+    fadeInOnScroll();
+    checkCountersInView();
+});

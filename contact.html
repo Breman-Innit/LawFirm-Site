@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Areas Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            padding: 2rem;
+            min-height: 150vh; /* Added to enable scrolling */
+        }
+
+        /* Practice Areas Section */
+        .practice-areas {
+            padding: 3rem 5%;
+            background-color: #f8f9fa;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-radius: 15px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: #1a3a5f;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: #666;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .area-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eaeaea;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .area-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 107, 179, 0.12);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .area-card h3 {
+            font-size: 1.1rem;
+            color: #1a3a5f;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .area-card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #2a6bb3;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1.5px solid #2a6bb3;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(8px);
+            font-size: 0.85rem;
+            align-self: flex-start;
+        }
+
+        .area-card:hover .read-more {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .read-more:hover {
+            background: #2a6bb3;
+            color: white;
+            transform: translateX(3px);
+        }
+
+        .read-more i {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .read-more:hover i {
+            transform: translateX(2px);
+        }
+
+        /* Fade In Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for cards */
+        .area-card.fade-in:nth-child(1) { transition-delay: 0.1s; }
+        .area-card.fade-in:nth-child(2) { transition-delay: 0.2s; }
+        .area-card.fade-in:nth-child(3) { transition-delay: 0.3s; }
+        .area-card.fade-in:nth-child(4) { transition-delay: 0.4s; }
+        .area-card.fade-in:nth-child(5) { transition-delay: 0.5s; }
+        .area-card.fade-in:nth-child(6) { transition-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .areas-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .area-card {
+                padding: 1.25rem;
+                height: auto;
+                min-height: 200px;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
+
+        .test-notice {
+            text-align: center;
+            background: #2a6bb3;
+            color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            color: #666;
+            margin-top: 2rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+  
+
+    <!-- Practice Areas Section -->
+    <section class="practice-areas fade-in">
+        <div class="section-header fade-in">
+            <h2>Our Practice Areas</h2>
+            <p>Expert legal services tailored to meet your specific needs.</p>
+        </div>
+        
+        <div class="areas-grid">
+            <!-- Criminal Defense -->
+            <div class="area-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h3>Criminal Defense</h3>
+                <p>Protecting your rights and freedom with aggressive defense strategies.</p>
+                <a href="#" class="read-more">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Real Estate Law -->
+            <div class="area-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Real Estate Law</h3>
+                <p>Property transactions, disputes, and real estate legal matters.</p>
+                <a href="#" class="read-more">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Family Law -->
+            <div class="area-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Family Law</h3>
+                <p>Divorce, child custody, and family matter resolution.</p>
+                <a href="#" class="read-more">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Business Law -->
+            <div class="area-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Business Law</h3>
+                <p>Corporate formation, contracts, and business litigation.</p>
+                <a href="#" class="read-more">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Personal Injury -->
+            <div class="area-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-car-crash"></i>
+                </div>
+                <h3>Personal Injury</h3>
+                <p>Compensation for injuries from accidents and negligence.</p>
+                <a href="#" class="read-more">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Immigration Law -->
+            <div class="area-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <h3>Immigration Law</h3>
+                <p>Visa applications, citizenship, and immigration compliance.</p>
+                <a href="#" class="read-more">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fade in on scroll function
+        function fadeInOnScroll() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+    </script>
+</body>
+</html>
