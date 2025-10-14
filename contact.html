@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice Areas Test</title>
+    <title>Why Choose Us - Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -16,288 +16,287 @@
         body {
             background: #f5f7fa;
             padding: 2rem;
-            min-height: 150vh; /* Added to enable scrolling */
         }
 
-        /* Practice Areas Section */
-        .practice-areas {
-            padding: 3rem 5%;
-            background-color: #f8f9fa;
+        /* Why Choose Us Section */
+        .why-choose-us {
+            padding: 5rem 5%;
+            background: white;
             max-width: 1400px;
             margin: 0 auto;
-            border-radius: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .section-header h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #1a3a5f;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .section-header p {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #666;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .areas-grid {
+        /* USP Grid */
+        .usp-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
-        .area-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        .usp-card {
+            background: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #eaeaea;
-            height: 220px;
-            display: flex;
-            flex-direction: column;
+            border-left: 4px solid #2a6bb3;
         }
 
-        .area-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(42, 107, 179, 0.12);
+        .usp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(42, 107, 179, 0.15);
         }
 
-        .card-icon {
-            width: 50px;
-            height: 50px;
+        .usp-icon {
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
-            border-radius: 10px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin: 0 auto 1.5rem;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
         }
 
-        .area-card h3 {
-            font-size: 1.1rem;
+        .usp-card h3 {
+            font-size: 1.4rem;
             color: #1a3a5f;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .area-card p {
-            color: #666;
-            line-height: 1.5;
-            font-size: 0.9rem;
             margin-bottom: 1rem;
-            flex-grow: 1;
         }
 
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: #2a6bb3;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border: 1.5px solid #2a6bb3;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(8px);
-            font-size: 0.85rem;
-            align-self: flex-start;
+        .usp-card p {
+            color: #666;
+            line-height: 1.6;
         }
 
-        .area-card:hover .read-more {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .read-more:hover {
-            background: #2a6bb3;
+        /* Awards & Certifications */
+        .awards-section {
+            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 4rem;
             color: white;
-            transform: translateX(3px);
         }
 
-        .read-more i {
-            transition: transform 0.3s ease;
-            font-size: 0.8rem;
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
         }
 
-        .read-more:hover i {
-            transform: translateX(2px);
+        .award-item {
+            padding: 1.5rem;
         }
 
-        /* Fade In Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+        .award-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .award-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Staggered animation for cards */
-        .area-card.fade-in:nth-child(1) { transition-delay: 0.1s; }
-        .area-card.fade-in:nth-child(2) { transition-delay: 0.2s; }
-        .area-card.fade-in:nth-child(3) { transition-delay: 0.3s; }
-        .area-card.fade-in:nth-child(4) { transition-delay: 0.4s; }
-        .area-card.fade-in:nth-child(5) { transition-delay: 0.5s; }
-        .area-card.fade-in:nth-child(6) { transition-delay: 0.6s; }
+        .award-item p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
 
         /* Responsive */
         @media (max-width: 768px) {
-            .areas-grid {
+            .usp-grid,
+            .awards-grid,
+            .testimonials-grid,
+            .metrics-grid {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 1.5rem;
             }
             
-            .area-card {
-                padding: 1.25rem;
-                height: auto;
-                min-height: 200px;
+            .why-choose-us {
+                padding: 3rem 2rem;
             }
             
-            body {
-                padding: 1rem;
-            }
+           
         }
 
-        .test-notice {
-            text-align: center;
-            background: #2a6bb3;
-            color: white;
-            padding: 0.8rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .scroll-indicator {
-            text-align: center;
-            color: #666;
-            margin-top: 2rem;
-            font-style: italic;
-        }
+     
     </style>
 </head>
 <body>
-  
+    <div class="test-notice">
+        Why Choose Us Section - Test File
+    </div>
 
-    <!-- Practice Areas Section -->
-    <section class="practice-areas fade-in">
-        <div class="section-header fade-in">
-            <h2>Our Practice Areas</h2>
-            <p>Expert legal services tailored to meet your specific needs.</p>
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="section-header">
+            <h2>Why Choose Justice Law Partners</h2>
+            <p>Discover what sets us apart and why we're the right choice for your legal needs</p>
         </div>
-        
-        <div class="areas-grid">
-            <!-- Criminal Defense -->
-            <div class="area-card fade-in">
-                <div class="card-icon">
-                    <i class="fas fa-gavel"></i>
+
+        <!-- Unique Selling Propositions -->
+        <div class="usp-grid">
+            <div class="usp-card">
+                <div class="usp-icon">
+                    <i class="fas fa-award"></i>
                 </div>
-                <h3>Criminal Defense</h3>
-                <p>Protecting your rights and freedom with aggressive defense strategies.</p>
-                <a href="#" class="read-more">
-                    Read More <i class="fas fa-arrow-right"></i>
-                </a>
+                <h3>Proven Track Record</h3>
+                <p>Over 50 years of combined experience with thousands of successful cases and satisfied clients.</p>
             </div>
 
-            <!-- Real Estate Law -->
-            <div class="area-card fade-in">
-                <div class="card-icon">
-                    <i class="fas fa-home"></i>
+            <div class="usp-card">
+                <div class="usp-icon">
+                    <i class="fas fa-user-tie"></i>
                 </div>
-                <h3>Real Estate Law</h3>
-                <p>Property transactions, disputes, and real estate legal matters.</p>
-                <a href="#" class="read-more">
-                    Read More <i class="fas fa-arrow-right"></i>
-                </a>
+                <h3>Expert Attorneys</h3>
+                <p>Our team includes specialized attorneys with expertise in various areas of law and industry recognition.</p>
             </div>
 
-            <!-- Family Law -->
-            <div class="area-card fade-in">
-                <div class="card-icon">
-                    <i class="fas fa-users"></i>
+            <div class="usp-card">
+                <div class="usp-icon">
+                    <i class="fas fa-handshake"></i>
                 </div>
-                <h3>Family Law</h3>
-                <p>Divorce, child custody, and family matter resolution.</p>
-                <a href="#" class="read-more">
-                    Read More <i class="fas fa-arrow-right"></i>
-                </a>
+                <h3>Client-First Approach</h3>
+                <p>We prioritize your needs with personalized attention and clear communication throughout your case.</p>
             </div>
+        </div>
 
-            <!-- Business Law -->
-            <div class="area-card fade-in">
-                <div class="card-icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <h3>Business Law</h3>
-                <p>Corporate formation, contracts, and business litigation.</p>
-                <a href="#" class="read-more">
-                    Read More <i class="fas fa-arrow-right"></i>
-                </a>
+        <!-- Awards & Certifications -->
+        <div class="awards-section">
+            <div class="section-header" style="color: white;">
+                <h2>Awards & Recognition</h2>
+                <p>Our commitment to excellence has been recognized by leading legal organizations</p>
             </div>
-
-            <!-- Personal Injury -->
-            <div class="area-card fade-in">
-                <div class="card-icon">
-                    <i class="fas fa-car-crash"></i>
+            <div class="awards-grid">
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4>Best Law Firm 2023</h4>
+                    <p>Legal Excellence Awards</p>
                 </div>
-                <h3>Personal Injury</h3>
-                <p>Compensation for injuries from accidents and negligence.</p>
-                <a href="#" class="read-more">
-                    Read More <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Top Rated Lawyers</h4>
+                    <p>Super Lawyers Association</p>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>AV Preeminent Rating</h4>
+                    <p>Martindale-Hubbell</p>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h4>Client Choice Award</h4>
+                    <p>American Bar Association</p>
+                </div>
             </div>
+        </div>
 
-            <!-- Immigration Law -->
-            <div class="area-card fade-in">
-                <div class="card-icon">
-                    <i class="fas fa-passport"></i>
+        <!-- Client Testimonials -->
+        <div class="testimonials-section">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Real stories from clients we've had the privilege to represent</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        Justice Law Partners handled my complex business litigation with exceptional skill. They achieved a settlement that exceeded my expectations and were transparent throughout the entire process.
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">JS</div>
+                        <div class="client-details">
+                            <h4>John Smith</h4>
+                            <p>Business Owner</p>
+                        </div>
+                    </div>
                 </div>
-                <h3>Immigration Law</h3>
-                <p>Visa applications, citizenship, and immigration compliance.</p>
-                <a href="#" class="read-more">
-                    Read More <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        During the most difficult time of my life, their family law team provided compassionate guidance and fierce representation. I couldn't have asked for better legal support.
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">SJ</div>
+                        <div class="client-details">
+                            <h4>Sarah Johnson</h4>
+                            <p>Family Law Client</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        The personal injury team fought tirelessly for my rights and secured a life-changing settlement. Their dedication and expertise made all the difference in my case.
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">MD</div>
+                        <div class="client-details">
+                            <h4>Michael Davis</h4>
+                            <p>Personal Injury Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Metrics -->
+        <div class="metrics-section">
+            <div class="section-header">
+                <h2>Our Success by Numbers</h2>
+                <p>Quantifiable results that demonstrate our commitment to client success</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-number">500+</div>
+                    <div class="metric-text">Cases Won</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">$50M+</div>
+                    <div class="metric-text">Recovered for Clients</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">98%</div>
+                    <div class="metric-text">Client Satisfaction Rate</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">24/7</div>
+                    <div class="metric-text">Client Support</div>
+                </div>
             </div>
         </div>
     </section>
-
-    <script>
-        // Fade in on scroll function
-        function fadeInOnScroll() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        // Event listeners
-        window.addEventListener('scroll', fadeInOnScroll);
-        window.addEventListener('load', fadeInOnScroll);
-    </script>
 </body>
 </html>

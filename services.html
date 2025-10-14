@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Choose Us - Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            padding: 2rem;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-us {
+            padding: 3rem 5%;
+            background: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: #1a3a5f;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: #666;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* USP Grid - Compact */
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .usp-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-left: 3px solid #2a6bb3;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .usp-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 107, 179, 0.12);
+        }
+
+        .usp-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .usp-card h3 {
+            font-size: 1.1rem;
+            color: #1a3a5f;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .usp-card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        /* Awards & Certifications - Compact */
+        .awards-section {
+            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .award-item {
+            padding: 1rem;
+        }
+
+        .award-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #ffd700;
+        }
+
+        .award-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .award-item p {
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
+
+        /* Success Metrics - Compact */
+        .metrics-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-item {
+            padding: 1rem;
+        }
+
+        .metric-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2a6bb3;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-text {
+            color: #1a3a5f;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .usp-grid,
+            .awards-grid,
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .why-choose-us {
+                padding: 2rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+
+            .usp-card {
+                height: auto;
+                min-height: 200px;
+                padding: 1.5rem;
+            }
+        }
+
+        .test-notice {
+            text-align: center;
+            background: #2a6bb3;
+            color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+
+   
+        <!-- Success Metrics -->
+        <div class="metrics-section">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem;">Our Success by Numbers</h2>
+                <p style="font-size: 0.9rem;">Quantifiable results that demonstrate our commitment to client success</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-number">500+</div>
+                    <div class="metric-text">Cases Won</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">$50M+</div>
+                    <div class="metric-text">Recovered for Clients</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">98%</div>
+                    <div class="metric-text">Client Satisfaction</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">24/7</div>
+                    <div class="metric-text">Client Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
