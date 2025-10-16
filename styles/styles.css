@@ -554,10 +554,33 @@ body.dark-mode .dark-mode-toggle .fa-sun {
 
 /* Mobile Styles */
 @media (max-width: 768px) {
+    /* Navigation layout - hamburger after contact button */
+    nav {
+        justify-content: space-between;
+    }
+    
+    .logo {
+        order: 1;
+    }
+    
+    .contact-btn {
+        order: 2;
+        display: block;
+        margin-right: 1rem;
+    }
+    
     .mobile-menu-btn {
+        order: 3;
         display: block;
     }
+    
+    /* Hide desktop elements */
+    .desktop-version,
+    .nav-links {
+        display: none;
+    }
 
+    /* Mobile menu styles */
     .nav-links {
         position: fixed;
         top: 0;
@@ -588,10 +611,6 @@ body.dark-mode .dark-mode-toggle .fa-sun {
     }
 
     /* Dark mode toggle mobile styles - SHOW ONLY ICONS */
-    .desktop-version {
-        display: none; /* Hide desktop toggle on mobile */
-    }
-    
     .mobile-dark-toggle {
         display: block; /* Show mobile toggle in menu */
         margin-top: 2rem;
@@ -691,7 +710,6 @@ body.dark-mode .dark-mode-toggle .fa-sun {
         padding: 3rem 2rem;
     }
 }
-
 /* Team Section */
 .team-section {
     padding: 5rem 5%;
