@@ -101,3 +101,43 @@ darkModeToggle.addEventListener('click', function() {
         localStorage.setItem('theme', 'light');
     }
 });
+
+// Add this JavaScript to your existing script file
+// Team section animation
+document.addEventListener('DOMContentLoaded', function() {
+    const teamSection = document.querySelector('.team-section');
+    const teamCards = document.querySelectorAll('.team-member-card');
+    const teamCta = document.querySelector('.team-cta-container');
+    
+    // Trigger fade-in animation
+    setTimeout(() => {
+        if (teamSection) {
+            teamSection.classList.add('fade-in-visible');
+            teamCta.classList.add('fade-in-visible');
+            
+            // Add staggered animation for individual cards
+            teamCards.forEach(card => {
+                card.classList.add('fade-in-visible');
+            });
+        }
+    }, 300);
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-visible');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe team section if it exists
+    if (teamSection) {
+        observer.observe(teamSection);
+    }
+});

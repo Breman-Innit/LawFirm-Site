@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Legal Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h1:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .team-grid.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .team-card.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-card:nth-child(1) { transition-delay: 0.1s; }
+        .team-card:nth-child(2) { transition-delay: 0.2s; }
+        .team-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover .card-overlay {
+            transform: translateY(0);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content .role {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .card-content .specialty {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .card-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .bio-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .bio-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .overlay-content h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay-content .role {
+            color: #3498db;
+        }
+
+        .overlay-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .see-more-container {
+            text-align: center;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+        }
+
+        .see-more-container.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .see-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.9rem 2.5rem;
+            background: linear-gradient(90deg, #2c3e50, #3498db);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .see-more-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+        }
+
+        .see-more-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .see-more-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h1 {
+                font-size: 2rem;
+            }
+            
+            .see-more-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <h1>Our Legal Team</h1>
+            <p>Meet our experienced attorneys dedicated to providing exceptional legal services with integrity and expertise.</p>
+        </div>
+        
+        <div class="team-grid">
+            <!-- Lawyer 1 -->
+            <div class="team-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Sarah Johnson">
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h3>Sarah Johnson</h3>
+                            <div class="role">Senior Partner</div>
+                            <p>With over 15 years of experience in corporate law, Sarah specializes in mergers and acquisitions.</p>
+                            <a href="#" class="bio-btn">View Full Bio</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>Sarah Johnson</h3>
+                    <div class="role">Senior Partner</div>
+                    <div class="specialty">Corporate Law, Mergers & Acquisitions</div>
+                    <div class="card-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-user"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lawyer 2 -->
+            <div class="team-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Michael Chen">
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h3>Michael Chen</h3>
+                            <div class="role">Litigation Attorney</div>
+                            <p>Michael has successfully represented clients in over 200 civil litigation cases with a 95% success rate.</p>
+                            <a href="#" class="bio-btn">View Full Bio</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>Michael Chen</h3>
+                    <div class="role">Litigation Attorney</div>
+                    <div class="specialty">Civil Litigation, Dispute Resolution</div>
+                    <div class="card-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-user"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lawyer 3 -->
+            <div class="team-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Elena Rodriguez">
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h3>Elena Rodriguez</h3>
+                            <div class="role">Intellectual Property Lawyer</div>
+                            <p>Elena helps tech startups protect their innovations with patents, trademarks, and copyrights.</p>
+                            <a href="#" class="bio-btn">View Full Bio</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>Elena Rodriguez</h3>
+                    <div class="role">Intellectual Property Lawyer</div>
+                    <div class="specialty">Patent Law, Trademarks, Copyright</div>
+                    <div class="card-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-user"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="see-more-container">
+            <a href="team.html" class="see-more-btn">
+                See More of Our Team
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth animation for card hover and fade-in effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.team-card');
+            const teamGrid = document.querySelector('.team-grid');
+            const seeMoreContainer = document.querySelector('.see-more-container');
+            
+            // Add hover effects
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Trigger fade-in animation after a short delay
+            setTimeout(() => {
+                teamGrid.classList.add('fade-in');
+                seeMoreContainer.classList.add('fade-in');
+                
+                // Add staggered animation for individual cards
+                cards.forEach(card => {
+                    card.classList.add('fade-in');
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
