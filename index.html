@@ -12,21 +12,33 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">Justice<span>Law</span> Partners</div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Practice Areas</a></li>
-            <li><a href="#">Attorneys</a></li>
-            <li><a href="#">Case Results</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-        <button class="dark-mode-toggle" id="darkModeToggle">
-         <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
+          <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
         </button>
-        <button class="contact-btn">Free Consultation</button>
-    </nav>
-
+         <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+        
+        <!-- Dark mode toggle for mobile -->
+        <li class="mobile-dark-toggle">
+            <button class="dark-mode-toggle mobile-version">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+                <span>Dark Mode</span>
+            </button>
+        </li>
+    </ul>
+    
+    <!-- Dark mode toggle for desktop (stays outside menu) -->
+    <button class="dark-mode-toggle desktop-version" id="darkModeToggle">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+</button>
+    <button class="contact-btn">Contact Us</button>
+</nav>
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">

@@ -80,31 +80,43 @@ window.addEventListener('load', () => {
     checkCountersInView();
 });
 
-// Dark Mode Toggle
-const darkModeToggle = document.getElementById('darkModeToggle');
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-// Check for saved theme or prefered scheme
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-    document.body.classList.add('dark-mode');
+// Dark Mode Toggle - Updated for both desktop and mobile
+function setupDarkMode() {
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Check for saved theme or preferred scheme
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Function to toggle dark mode
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        
+        // Save theme preference
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    }
+    
+    // Set up desktop toggle
+    const desktopDarkToggle = document.getElementById('darkModeToggle');
+    if (desktopDarkToggle) {
+        desktopDarkToggle.addEventListener('click', toggleDarkMode);
+    }
+    
+    // Set up mobile toggle
+    const mobileDarkToggle = document.querySelector('.mobile-dark-toggle .dark-mode-toggle');
+    if (mobileDarkToggle) {
+        mobileDarkToggle.addEventListener('click', toggleDarkMode);
+    }
 }
 
-// Toggle dark mode
-darkModeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    
-    // Save theme preference
-    if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
-});
-
-// Add this JavaScript to your existing script file
 // Team section animation
-document.addEventListener('DOMContentLoaded', function() {
+function setupTeamAnimations() {
     const teamSection = document.querySelector('.team-section');
     const teamCards = document.querySelectorAll('.team-member-card');
     const teamCta = document.querySelector('.team-cta-container');
@@ -140,4 +152,43 @@ document.addEventListener('DOMContentLoaded', function() {
     if (teamSection) {
         observer.observe(teamSection);
     }
+}
+
+// Mobile menu functionality
+function setupMobileMenu() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Change icon when menu is open
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking on links
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+    }
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupDarkMode();
+    setupTeamAnimations();
+    setupMobileMenu();
 });
