@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Why Choose Us - Test</title>
+    <title>Live Firm Statistics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,18 +14,23 @@
         }
 
         body {
-            background: #f5f7fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 2rem;
         }
 
-        /* Why Choose Us Section */
-        .why-choose-us {
-            padding: 5rem 5%;
-            background: white;
-            max-width: 1400px;
-            margin: 0 auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .live-stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .section-header {
@@ -34,9 +39,12 @@
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
-            color: #1a3a5f;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         .section-header p {
@@ -44,33 +52,46 @@
             color: #666;
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
-        /* USP Grid */
-        .usp-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
-        .usp-card {
-            background: #f8f9fa;
-            padding: 2.5rem;
-            border-radius: 15px;
+        .live-stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            border-left: 4px solid #2a6bb3;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
         }
 
-        .usp-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(42, 107, 179, 0.15);
+        .live-stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2a6bb3, #1a3a5f);
         }
 
-        .usp-icon {
-            width: 70px;
-            height: 70px;
+        .live-stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
             border-radius: 50%;
             display: flex;
@@ -78,225 +99,442 @@
             justify-content: center;
             margin: 0 auto 1.5rem;
             color: white;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            transition: all 0.3s ease;
         }
 
-        .usp-card h3 {
-            font-size: 1.4rem;
+        .live-stat-card:hover .stat-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .stat-content {
+            position: relative;
+        }
+
+        .live-number {
+            font-size: 3.5rem;
+            font-weight: 800;
             color: #1a3a5f;
-            margin-bottom: 1rem;
-        }
-
-        .usp-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Awards & Certifications */
-        .awards-section {
-            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
-            padding: 3rem;
-            border-radius: 15px;
-            margin-bottom: 4rem;
-            color: white;
-        }
-
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .award-item {
-            padding: 1.5rem;
-        }
-
-        .award-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #ffd700;
-        }
-
-        .award-item h4 {
-            font-size: 1.1rem;
             margin-bottom: 0.5rem;
+            line-height: 1;
         }
 
-        .award-item p {
-            opacity: 0.9;
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .stat-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
             font-size: 0.9rem;
+            font-weight: 600;
         }
 
+        .trend-up {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
 
-        /* Responsive */
+        .trend-down {
+            background: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+        }
+
+        .trend-neutral {
+            background: rgba(255, 193, 7, 0.1);
+            color: #FFC107;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .stats-footer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .update-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .last-updated {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Real-time activity feed */
+        .activity-feed {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-header h3 {
+            color: #1a3a5f;
+            font-size: 1.4rem;
+        }
+
+        .activity-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            animation: slideIn 0.5s ease;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2a6bb3;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .activity-time {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .usp-grid,
-            .awards-grid,
-            .testimonials-grid,
-            .metrics-grid {
+            .live-stats-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .live-number {
+                font-size: 2.8rem;
+            }
+            
+            .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
-            .why-choose-us {
-                padding: 3rem 2rem;
-            }
-            
-           
         }
-
-     
     </style>
 </head>
 <body>
-    <div class="test-notice">
-        Why Choose Us Section - Test File
-    </div>
-
-    <!-- Why Choose Us Section -->
-    <section class="why-choose-us">
+    <section class="live-stats-section">
         <div class="section-header">
-            <h2>Why Choose Justice Law Partners</h2>
-            <p>Discover what sets us apart and why we're the right choice for your legal needs</p>
+            <h2>Firm Activity This Month</h2>
+            <p>Real-time updates on our ongoing commitment to serving clients and achieving justice</p>
         </div>
 
-        <!-- Unique Selling Propositions -->
-        <div class="usp-grid">
-            <div class="usp-card">
-                <div class="usp-icon">
-                    <i class="fas fa-award"></i>
+        <div class="stats-grid">
+            <!-- Active Cases -->
+            <div class="live-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-gavel"></i>
                 </div>
-                <h3>Proven Track Record</h3>
-                <p>Over 50 years of combined experience with thousands of successful cases and satisfied clients.</p>
+                <div class="stat-content">
+                    <div class="live-number" data-target="47">0</div>
+                    <div class="stat-label">Active Cases</div>
+                    <div class="stat-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        +12% this week
+                    </div>
+                    <div class="live-indicator">
+                        <div class="pulse-dot"></div>
+                        Updated just now
+                    </div>
+                </div>
             </div>
 
-            <div class="usp-card">
-                <div class="usp-icon">
-                    <i class="fas fa-user-tie"></i>
+            <!-- Cases Closed -->
+            <div class="live-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
                 </div>
-                <h3>Expert Attorneys</h3>
-                <p>Our team includes specialized attorneys with expertise in various areas of law and industry recognition.</p>
+                <div class="stat-content">
+                    <div class="live-number" data-target="23">0</div>
+                    <div class="stat-label">Cases Closed</div>
+                    <div class="stat-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        +8% this month
+                    </div>
+                    <div class="live-indicator">
+                        <div class="pulse-dot"></div>
+                        Updated 2 min ago
+                    </div>
+                </div>
             </div>
 
-            <div class="usp-card">
-                <div class="usp-icon">
-                    <i class="fas fa-handshake"></i>
+            <!-- New Consultations -->
+            <div class="live-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-check"></i>
                 </div>
-                <h3>Client-First Approach</h3>
-                <p>We prioritize your needs with personalized attention and clear communication throughout your case.</p>
+                <div class="stat-content">
+                    <div class="live-number" data-target="34">0</div>
+                    <div class="stat-label">New Consultations</div>
+                    <div class="stat-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        +15% today
+                    </div>
+                    <div class="live-indicator">
+                        <div class="pulse-dot"></div>
+                        Live updating
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Awards & Certifications -->
-        <div class="awards-section">
-            <div class="section-header" style="color: white;">
-                <h2>Awards & Recognition</h2>
-                <p>Our commitment to excellence has been recognized by leading legal organizations</p>
-            </div>
-            <div class="awards-grid">
-                <div class="award-item">
-                    <div class="award-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h4>Best Law Firm 2023</h4>
-                    <p>Legal Excellence Awards</p>
+            <!-- Client Satisfaction -->
+            <div class="live-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
                 </div>
-                <div class="award-item">
-                    <div class="award-icon">
-                        <i class="fas fa-star"></i>
+                <div class="stat-content">
+                    <div class="live-number" data-target="98">0</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                    <div class="stat-trend trend-neutral">
+                        <i class="fas fa-minus"></i>
+                        Stable rating
                     </div>
-                    <h4>Top Rated Lawyers</h4>
-                    <p>Super Lawyers Association</p>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h4>AV Preeminent Rating</h4>
-                    <p>Martindale-Hubbell</p>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h4>Client Choice Award</h4>
-                    <p>American Bar Association</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Client Testimonials -->
-        <div class="testimonials-section">
-            <div class="section-header">
-                <h2>What Our Clients Say</h2>
-                <p>Real stories from clients we've had the privilege to represent</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        Justice Law Partners handled my complex business litigation with exceptional skill. They achieved a settlement that exceeded my expectations and were transparent throughout the entire process.
-                    </div>
-                    <div class="client-info">
-                        <div class="client-avatar">JS</div>
-                        <div class="client-details">
-                            <h4>John Smith</h4>
-                            <p>Business Owner</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        During the most difficult time of my life, their family law team provided compassionate guidance and fierce representation. I couldn't have asked for better legal support.
-                    </div>
-                    <div class="client-info">
-                        <div class="client-avatar">SJ</div>
-                        <div class="client-details">
-                            <h4>Sarah Johnson</h4>
-                            <p>Family Law Client</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        The personal injury team fought tirelessly for my rights and secured a life-changing settlement. Their dedication and expertise made all the difference in my case.
-                    </div>
-                    <div class="client-info">
-                        <div class="client-avatar">MD</div>
-                        <div class="client-details">
-                            <h4>Michael Davis</h4>
-                            <p>Personal Injury Client</p>
-                        </div>
+                    <div class="live-indicator">
+                        <div class="pulse-dot" style="background: #FFC107;"></div>
+                        Updated today
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Success Metrics -->
-        <div class="metrics-section">
-            <div class="section-header">
-                <h2>Our Success by Numbers</h2>
-                <p>Quantifiable results that demonstrate our commitment to client success</p>
+        <!-- Real-time Activity Feed -->
+        <div class="activity-feed">
+            <div class="activity-header">
+                <h3><i class="fas fa-bolt"></i> Recent Activity</h3>
             </div>
-            <div class="metrics-grid">
-                <div class="metric-item">
-                    <div class="metric-number">500+</div>
-                    <div class="metric-text">Cases Won</div>
+            <div class="activity-list" id="activityList">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-text">New consultation scheduled - Business Contract Review</div>
+                        <div class="activity-time">2 minutes ago</div>
+                    </div>
                 </div>
-                <div class="metric-item">
-                    <div class="metric-number">$50M+</div>
-                    <div class="metric-text">Recovered for Clients</div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-text">Case closed successfully - Personal Injury Settlement</div>
+                        <div class="activity-time">15 minutes ago</div>
+                    </div>
                 </div>
-                <div class="metric-item">
-                    <div class="metric-number">98%</div>
-                    <div class="metric-text">Client Satisfaction Rate</div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-text">New case filed - Employment Discrimination</div>
+                        <div class="activity-time">1 hour ago</div>
+                    </div>
                 </div>
-                <div class="metric-item">
-                    <div class="metric-number">24/7</div>
-                    <div class="metric-text">Client Support</div>
+            </div>
+        </div>
+
+        <div class="stats-footer">
+            <div class="update-info">
+                <div class="last-updated">
+                    <i class="fas fa-sync-alt"></i>
+                    Last updated: <span id="lastUpdateTime">Just now</span>
+                </div>
+                <div class="live-status">
+                    <i class="fas fa-circle" style="color: #4CAF50;"></i>
+                    System live and updating
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Counter animation function
+            function animateCounter(counter) {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let current = 0;
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                        // Add symbols if needed
+                        if(target === 98) {
+                            counter.textContent = target + '%';
+                        } else {
+                            counter.textContent = target;
+                        }
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 16);
+            }
+
+            // Initialize counters
+            const counters = document.querySelectorAll('.live-number');
+            counters.forEach(counter => {
+                animateCounter(counter);
+            });
+
+            // Simulate real-time updates
+            function simulateLiveUpdates() {
+                // Randomly update numbers slightly
+                setTimeout(() => {
+                    const activeCases = document.querySelector('.live-stat-card:nth-child(1) .live-number');
+                    const newValue = 47 + Math.floor(Math.random() * 3);
+                    activeCases.setAttribute('data-target', newValue);
+                    animateCounter(activeCases);
+                }, 5000);
+
+                // Update last updated time
+                setInterval(() => {
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    document.getElementById('lastUpdateTime').textContent = timeString;
+                }, 30000);
+
+                // Add new activity items
+                const activities = [
+                    "New client consultation - Family Law Matter",
+                    "Document filed - Civil Litigation Case",
+                    "Settlement reached - Contract Dispute",
+                    "Court appearance scheduled - Criminal Defense",
+                    "Client review submitted - 5 stars",
+                    "Case research completed - Intellectual Property",
+                    "Meeting scheduled - Estate Planning",
+                    "Documents prepared - Real Estate Closing"
+                ];
+
+                setInterval(() => {
+                    const activityList = document.getElementById('activityList');
+                    const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+                    
+                    const newItem = document.createElement('div');
+                    newItem.className = 'activity-item';
+                    newItem.innerHTML = `
+                        <div class="activity-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">${randomActivity}</div>
+                            <div class="activity-time">Just now</div>
+                        </div>
+                    `;
+                    
+                    activityList.insertBefore(newItem, activityList.firstChild);
+                    
+                    // Remove old items if too many
+                    if (activityList.children.length > 5) {
+                        activityList.removeChild(activityList.lastChild);
+                    }
+                }, 15000);
+            }
+
+            // Start live updates
+            simulateLiveUpdates();
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.live-stat-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Update time initially
+            const now = new Date();
+            document.getElementById('lastUpdateTime').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        });
+    </script>
 </body>
 </html>

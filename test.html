@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Legal Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .instant-support {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .support-content h2 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .support-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .support-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .online-indicator {
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .support-status span {
+            font-weight: 600;
+            color: #2d5016;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(42, 107, 179, 0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Quick questions */
+        .quick-questions {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .quick-questions h3 {
+            color: #1a3a5f;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .question-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-btn {
+            background: white;
+            border: 1px solid #e9ecef;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #333;
+            text-align: left;
+        }
+
+        /* Response bubble */
+        .response-bubble {
+            display: none;
+            background: #2a6bb3;
+            color: white;
+            padding: 1.2rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            text-align: left;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Online users */
+        .online-users {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            padding: 0.8rem;
+            background: rgba(42, 107, 179, 0.05);
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .user-avatars {
+            display: flex;
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: -8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .user-avatar:first-child {
+            margin-left: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .instant-support {
+                padding: 2rem 1.5rem;
+            }
+            
+            .support-content h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="instant-support">
+        <div class="support-content">
+            <h2>Need Immediate Legal Advice?</h2>
+            <p>Chat live with our legal assistants for quick guidance</p>
+            
+            <div class="support-status">
+                <span class="online-indicator"></span>
+                <span>Legal assistants online now</span>
+            </div>
+
+            <button class="btn-primary" id="startChat">
+                <i class="fas fa-comments"></i> Start Live Chat
+            </button>
+
+            <!-- Quick questions -->
+            <div class="quick-questions">
+                <h3>Quick Questions</h3>
+                <div class="question-buttons">
+                    <button class="question-btn" data-question="accident">
+                        <i class="fas fa-car-crash"></i> What should I do after a car accident?
+                    </button>
+                    <button class="question-btn" data-question="employment">
+                        <i class="fas fa-briefcase"></i> My employer won't pay me - what are my rights?
+                    </button>
+                    <button class="question-btn" data-question="landlord">
+                        <i class="fas fa-home"></i> My landlord isn't making repairs - what can I do?
+                    </button>
+                </div>
+
+                <!-- Response bubble -->
+                <div class="response-bubble" id="responseBubble">
+                    <strong>Quick Answer:</strong>
+                    <p id="responseText" style="margin-top: 0.5rem;">Based on your situation, you may have legal options. Let's discuss your specific case.</p>
+                </div>
+            </div>
+
+            <!-- Online users -->
+            <div class="online-users">
+                <div class="user-avatars">
+                    <div class="user-avatar">JS</div>
+                    <div class="user-avatar">MC</div>
+                    <div class="user-avatar">ER</div>
+                </div>
+                <div class="users-text">
+                    <strong>3 people</strong> getting help now
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startChatBtn = document.getElementById('startChat');
+            const responseBubble = document.getElementById('responseBubble');
+            const responseText = document.getElementById('responseText');
+            const questionBtns = document.querySelectorAll('.question-btn');
+
+            // Quick question responses
+            const responses = {
+                accident: "After a car accident: 1) Check for injuries 2) Call police 3) Exchange information 4) Take photos 5) Don't admit fault 6) Contact us for free case review.",
+                employment: "If your employer isn't paying you: Document everything, review your contract, and contact labor board. You may have a wage claim.",
+                landlord: "For landlord issues: Document all requests, check your lease terms, know your state's tenant rights. We can help send formal demands."
+            };
+
+            questionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const questionType = this.getAttribute('data-question');
+                    responseText.textContent = responses[questionType];
+                    responseBubble.style.display = 'block';
+                    
+                    // Scroll to response
+                    responseBubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                });
+            });
+
+            // Start chat button
+            startChatBtn.addEventListener('click', function() {
+                responseText.textContent = "Welcome! I'm Sarah, your legal assistant. I'm here to help guide you through your legal questions. What specific situation are you dealing with today?";
+                responseBubble.style.display = 'block';
+                this.innerHTML = '<i class="fas fa-comment-dots"></i> Chat Started!';
+                this.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+            });
+
+            // Simulate user activity
+            function simulateUserActivity() {
+                const usersText = document.querySelector('.users-text strong');
+                
+                setInterval(() => {
+                    const userCount = 2 + Math.floor(Math.random() * 3);
+                    usersText.textContent = `${userCount} people`;
+                }, 8000);
+            }
+
+            simulateUserActivity();
+        });
+    </script>
+</body>
+</html>

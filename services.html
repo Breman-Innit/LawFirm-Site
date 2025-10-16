@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Legal Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .instant-support {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instant-support::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2a6bb3, #1a3a5f, #2a6bb3);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .support-content h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .support-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .support-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            margin-bottom: 2.5rem;
+            border: 2px solid rgba(76, 175, 80, 0.2);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(76, 175, 80, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .online-indicator {
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .online-indicator::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: #4CAF50;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: ripple 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .support-status span {
+            font-weight: 600;
+            color: #2d5016;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(42, 107, 179, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(42, 107, 179, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        /* Live typing indicator */
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #666;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Quick questions */
+        .quick-questions {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .quick-questions h3 {
+            color: #1a3a5f;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .question-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .question-btn {
+            background: white;
+            border: 2px solid #e9ecef;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            color: #333;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #2a6bb3;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .question-btn:hover::before {
+            transform: scaleY(1);
+        }
+
+        .question-btn:hover {
+            border-color: #2a6bb3;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Response bubble */
+        .response-bubble {
+            display: none;
+            background: #2a6bb3;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            text-align: left;
+            animation: slideUp 0.5s ease;
+            position: relative;
+        }
+
+        .response-bubble::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #2a6bb3;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Online users */
+        .online-users {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(42, 107, 179, 0.05);
+            border-radius: 15px;
+        }
+
+        .user-avatars {
+            display: flex;
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: -10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .user-avatar:first-child {
+            margin-left: 0;
+        }
+
+        .users-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .instant-support {
+                padding: 2rem 1.5rem;
+            }
+            
+            .support-content h2 {
+                font-size: 2rem;
+            }
+            
+            .question-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="instant-support">
+        <div class="support-content">
+            <h2>Need Immediate Legal Advice?</h2>
+            <p>Chat live with our legal assistants for quick guidance on your situation</p>
+            
+            <div class="support-status">
+                <span class="online-indicator"></span>
+                <span>Legal assistants online now</span>
+            </div>
+
+            <button class="btn-primary" id="startChat">
+                <i class="fas fa-comments"></i> Start Live Chat
+            </button>
+
+            <!-- Live typing indicator -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+                <span>Legal assistant is typing...</span>
+            </div>
+
+            <!-- Online users -->
+            <div class="online-users">
+                <div class="user-avatars">
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">JS</div>
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">MC</div>
+                    <div class="user-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">ER</div>
+                </div>
+                <div class="users-text">
+                    <strong>3 people</strong> are getting help right now
+                </div>
+            </div>
+
+            <!-- Quick questions -->
+            <div class="quick-questions">
+                <h3>Quick Questions</h3>
+                <div class="question-buttons">
+                    <button class="question-btn" data-question="accident">
+                        <i class="fas fa-car-crash"></i> What should I do after a car accident?
+                    </button>
+                    <button class="question-btn" data-question="employment">
+                        <i class="fas fa-briefcase"></i> My employer won't pay me - what are my rights?
+                    </button>
+                    <button class="question-btn" data-question="landlord">
+                        <i class="fas fa-home"></i> My landlord isn't making repairs - what can I do?
+                    </button>
+                    <button class="question-btn" data-question="injury">
+                        <i class="fas fa-user-injured"></i> Can I sue for emotional distress?
+                    </button>
+                </div>
+
+                <!-- Response bubble -->
+                <div class="response-bubble" id="responseBubble">
+                    <strong>Quick Answer:</strong>
+                    <p id="responseText">Based on your situation, you may have legal options. Let's discuss your specific case in detail.</p>
+                    <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 1rem;">
+                        Discuss My Case
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startChatBtn = document.getElementById('startChat');
+            const typingIndicator = document.getElementById('typingIndicator');
+            const responseBubble = document.getElementById('responseBubble');
+            const responseText = document.getElementById('responseText');
+            const questionBtns = document.querySelectorAll('.question-btn');
+
+            // Simulate assistant typing when chat starts
+            startChatBtn.addEventListener('click', function() {
+                // Show typing indicator
+                typingIndicator.style.display = 'flex';
+                
+                // Simulate typing delay
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    
+                    // Show welcome message in response bubble
+                    responseText.innerHTML = `<strong>Welcome!</strong> I'm Sarah, your legal assistant. I'm here to help guide you through your legal questions. What specific situation are you dealing with today?`;
+                    responseBubble.style.display = 'block';
+                    
+                    // Animate the button
+                    this.innerHTML = '<i class="fas fa-comment-dots"></i> Chat Started!';
+                    this.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                    
+                    // Add pulse animation to response bubble
+                    responseBubble.style.animation = 'none';
+                    setTimeout(() => {
+                        responseBubble.style.animation = 'slideUp 0.5s ease, pulse-glow 2s infinite';
+                    }, 10);
+                }, 2000);
+            });
+
+            // Quick question responses
+            const responses = {
+                accident: "After a car accident: 1) Check for injuries 2) Call police 3) Exchange information 4) Take photos 5) Don't admit fault 6) Contact us for free case review.",
+                employment: "If your employer isn't paying you: Document everything, review your contract, and contact labor board. You may have a wage claim. Let's discuss your specific situation.",
+                landlord: "For landlord issues: Document all requests, check your lease terms, know your state's tenant rights. We can help send formal demands or pursue legal action if needed.",
+                injury: "Emotional distress claims require proving severe impact on daily life. Factors include duration, medical treatment, and connection to the incident. Let's evaluate your case."
+            };
+
+            questionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const questionType = this.getAttribute('data-question');
+                    
+                    // Show typing indicator
+                    typingIndicator.style.display = 'flex';
+                    responseBubble.style.display = 'none';
+                    
+                    // Simulate assistant thinking
+                    setTimeout(() => {
+                        typingIndicator.style.display = 'none';
+                        responseText.innerHTML = responses[questionType];
+                        responseBubble.style.display = 'block';
+                        
+                        // Scroll to response
+                        responseBubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 1500);
+                });
+            });
+
+            // Simulate online status changes
+            function simulateOnlineActivity() {
+                const statusIndicator = document.querySelector('.online-indicator');
+                const statusText = document.querySelector('.support-status span');
+                
+                // Randomly change status occasionally (95% online)
+                setInterval(() => {
+                    if (Math.random() > 0.95) {
+                        statusIndicator.style.background = '#FFC107';
+                        statusText.textContent = 'Legal assistants busy - 2 min wait';
+                    } else {
+                        statusIndicator.style.background = '#4CAF50';
+                        statusText.textContent = 'Legal assistants online now';
+                    }
+                }, 10000);
+            }
+
+            // Simulate user activity
+            function simulateUserActivity() {
+                const userAvatars = document.querySelector('.user-avatars');
+                const usersText = document.querySelector('.users-text strong');
+                
+                setInterval(() => {
+                    const userCount = 2 + Math.floor(Math.random() * 4);
+                    usersText.textContent = `${userCount} people`;
+                    
+                    // Occasionally add/remove avatar
+                    if (Math.random() > 0.7) {
+                        const avatars = userAvatars.querySelectorAll('.user-avatar');
+                        if (avatars.length > 1 && Math.random() > 0.5) {
+                            userAvatars.removeChild(avatars[avatars.length - 1]);
+                        } else if (avatars.length < 5) {
+                            const newAvatar = document.createElement('div');
+                            newAvatar.className = 'user-avatar';
+                            newAvatar.textContent = 'NL';
+                            newAvatar.style.background = `linear-gradient(135deg, #${Math.floor(Math.random()*16777215).toString(16)}, #${Math.floor(Math.random()*16777215).toString(16)})`;
+                            userAvatars.appendChild(newAvatar);
+                        }
+                    }
+                }, 8000);
+            }
+
+            // Start simulations
+            simulateOnlineActivity();
+            simulateUserActivity();
+        });
+    </script>
+</body>
+</html>

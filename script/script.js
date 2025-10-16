@@ -192,3 +192,89 @@ document.addEventListener('DOMContentLoaded', function() {
     setupTeamAnimations();
     setupMobileMenu();
 });
+
+// Blog Carousel Functionality
+function initBlogCarousel() {
+    const track = document.getElementById('carouselTrack');
+    const cards = document.querySelectorAll('.blog-card');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('carouselDots');
+    
+    if (!track || !cards.length) return;
+    
+    let currentIndex = 0;
+    const totalCards = cards.length;
+    const cardsPerView = getCardsPerView();
+    
+    // Create dots based on number of slides
+    const totalSlides = Math.ceil(totalCards / cardsPerView);
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+    
+    const dots = document.querySelectorAll('.dot');
+    
+    function getCardsPerView() {
+        if (window.innerWidth < 768) return 1;
+        if (window.innerWidth < 1024) return 2;
+        return 3;
+    }
+    
+    function updateCarousel() {
+        const cardWidth = cards[0].offsetWidth + 24; // card width + gap
+        track.style.transform = `translateX(-${currentIndex * cardWidth * cardsPerView}px)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+    }
+    
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+        updateCarousel();
+    }
+    
+    // Auto-rotate every 3 seconds
+    let autoSlide = setInterval(nextSlide, 3000);
+    
+    // Pause auto-rotate when interacting with carousel
+    track.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    track.addEventListener('mouseleave', () => {
+        autoSlide = setInterval(nextSlide, 3000);
+    });
+    
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        currentIndex = 0;
+        updateCarousel();
+    });
+    
+    // Initialize
+    updateCarousel();
+}
+
+// Initialize blog carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initBlogCarousel();
+});
