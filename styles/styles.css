@@ -551,6 +551,11 @@ body.dark-mode .dark-mode-toggle .fa-sun {
     background: #2a6bb3;
     color:white;
 }
+/* Hide close button on desktop by default */
+.mobile-close-btn {
+    display: none;
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
     /* Navigation layout - hamburger after contact button */
@@ -601,12 +606,14 @@ body.dark-mode .dark-mode-toggle .fa-sun {
         left: 0;
     }
 
-    /* Close button inside mobile menu */
+    /* Close button inside mobile menu - NOW PROPERLY HIDDEN ON DESKTOP */
     .mobile-close-btn {
+        display: block; /* Show only on mobile */
         position: absolute;
         top: 1.5rem;
         right: 1.5rem;
         margin: 0 !important;
+        list-style: none;
     }
     
     .close-menu {
@@ -640,6 +647,7 @@ body.dark-mode .dark-mode-toggle .fa-sun {
         margin: 1rem 0;
         width: 100%;
         text-align: center;
+        list-style: none;
     }
 
     .nav-links a {
@@ -664,6 +672,7 @@ body.dark-mode .dark-mode-toggle .fa-sun {
         border-top: 1px solid #eee;
         width: 100%;
         text-align: center;
+        list-style: none;
     }
     
     .mobile-dark-toggle .dark-mode-toggle {
