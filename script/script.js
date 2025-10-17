@@ -154,44 +154,39 @@ function setupTeamAnimations() {
     }
 }
 
-// Mobile menu functionality
+// Mobile menu functionality - UPDATED WITH CLOSE BUTTON
 function setupMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
+    const closeMenuBtn = document.querySelector('.close-menu');
     
     if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            
-            // Change icon when menu is open
-            const icon = this.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+            navLinks.classList.add('active');
         });
+        
+        if (closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+            });
+        }
         
         // Close menu when clicking on links
         const navItems = navLinks.querySelectorAll('a');
         navItems.forEach(item => {
             item.addEventListener('click', function() {
                 navLinks.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
             });
+        });
+        
+        // Close menu when clicking on overlay background
+        navLinks.addEventListener('click', function(e) {
+            if (e.target === this) {
+                navLinks.classList.remove('active');
+            }
         });
     }
 }
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    setupDarkMode();
-    setupTeamAnimations();
-    setupMobileMenu();
-});
 
 // Blog Carousel Functionality
 function initBlogCarousel() {
@@ -252,12 +247,12 @@ function initBlogCarousel() {
     }
     
     // Auto-rotate every 3 seconds
-    let autoSlide = setInterval(nextSlide, 3000);
+    let autoSlide = setInterval(nextSlide, 7000);
     
     // Pause auto-rotate when interacting with carousel
     track.addEventListener('mouseenter', () => clearInterval(autoSlide));
     track.addEventListener('mouseleave', () => {
-        autoSlide = setInterval(nextSlide, 3000);
+        autoSlide = setInterval(nextSlide, 7000);
     });
     
     // Event listeners
@@ -274,7 +269,58 @@ function initBlogCarousel() {
     updateCarousel();
 }
 
-// Initialize blog carousel when DOM is loaded
+// Footer fade-in animation
+function initFooterAnimation() {
+    const footer = document.querySelector('.footer-section.fade-in');
+    if (!footer) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    observer.observe(footer);
+}
+
+// Newsletter form handling
+function initNewsletterForm() {
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (!newsletterForm) return;
+
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const emailInput = this.querySelector('.newsletter-input');
+        const email = emailInput.value.trim();
+        
+        if (email) {
+            // Simulate form submission
+            emailInput.value = '';
+            const btn = this.querySelector('.newsletter-btn');
+            const originalHTML = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.style.background = '#45a049';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = '';
+            }, 2000);
+        }
+    });
+}
+
+// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    setupDarkMode();
+    setupTeamAnimations();
+    setupMobileMenu(); // Updated mobile menu function
     initBlogCarousel();
+    initFooterAnimation();
+    initNewsletterForm();
 });

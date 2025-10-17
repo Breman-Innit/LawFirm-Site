@@ -13,22 +13,28 @@
 <nav>
     <div class="logo">Justice<span>Law</span> Partners</div>
     
-    <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#contact">Contact</a></li>
-        
-        <!-- Dark mode toggle for mobile -->
-        <li class="mobile-dark-toggle">
-            <button class="dark-mode-toggle mobile-version">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-                <span>Dark Mode</span>
-            </button>
-        </li>
-    </ul>
+   <ul class="nav-links">
+    <!-- Close button inside the menu -->
+    <li class="mobile-close-btn">
+        <button class="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+    </li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+    
+    <!-- Dark mode toggle for mobile -->
+    <li class="mobile-dark-toggle">
+        <button class="dark-mode-toggle mobile-version">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+            <span>Dark Mode</span>
+        </button>
+    </li>
+</ul>
     
     <!-- Dark mode toggle for desktop (stays outside menu) -->
     <button class="dark-mode-toggle desktop-version" id="darkModeToggle">
@@ -403,7 +409,7 @@
                     <p>Learn which contract provisions are crucial for business protection.</p>
                     <div class="card-footer">
                         <div class="author">
-                            <img src="images/team/elena-thumb.jpg" alt="Elena Rodriguez" class="author-avatar">
+                            <img src="images/maleLawyer2.jpg" alt="Elena Rodriguez" class="author-avatar">
                             <div class="author-info">
                                 <h4>Elena Rodriguez</h4>
                                 <span>Business Law Expert</span>
@@ -445,7 +451,7 @@
             <!-- Blog Post 5 -->
             <article class="blog-card">
                 <div class="card-image">
-                    <img src="images/blog/personal-injury.jpg" alt="Personal Injury">
+                    <img src="images/injury.jpg" alt="Personal Injury">
                 </div>
                 <div class="card-content">
                     <div class="card-meta">
@@ -485,7 +491,7 @@
                     <p>Understanding the latest changes in immigration laws and how they affect visa applications.</p>
                     <div class="card-footer">
                         <div class="author">
-                            <img src="images/team/maria-thumb.jpg" alt="Maria Garcia" class="author-avatar">
+                            <img src="images/femaleLawyer1.jpg" alt="Maria Garcia" class="author-avatar">
                             <div class="author-info">
                                 <h4>Maria Garcia</h4>
                                 <span>Immigration Attorney</span>
@@ -511,6 +517,94 @@
      
     </div>
 </section>
+
+<!-- Footer Section -->
+<footer class="footer-section fade-in">
+    <div class="footer-container">
+        <!-- Main Footer Content -->
+        <div class="footer-main">
+            <!-- Company Info -->
+            <div class="footer-column">
+                <div class="footer-logo">Justice<span>Law</span> Partners</div>
+                <p class="footer-description">
+                    Providing exceptional legal representation with integrity, expertise, and dedication to client success since 1995.
+                </p>
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Legal Avenue, Suite 500<br>New York, NY 10001</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@justicelawpartners.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practice Areas -->
+            <div class="footer-column">
+                <h3 class="footer-title">Practice Areas</h3>
+                <ul class="footer-links">
+                    <li><a href="#criminal-defense">Criminal Defense</a></li>
+                    <li><a href="#personal-injury">Personal Injury</a></li>
+                    <li><a href="#family-law">Family Law</a></li>
+                    <li><a href="#business-law">Business Law</a></li>
+                    <li><a href="#real-estate">Real Estate Law</a></li>
+                    <li><a href="#immigration">Immigration Law</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-column">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter & Social -->
+            <div class="footer-column">
+                <h3 class="footer-title">Stay Updated</h3>
+                <p class="newsletter-text">Get the latest legal insights and firm updates delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button type="submit" class="newsletter-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    &copy; 2025 Justice Law Partners. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#disclaimer">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
     <script src="script/script.js"></script>
 </body>
