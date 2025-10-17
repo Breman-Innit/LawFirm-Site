@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Justice Law Partners</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a3a5f;
+        }
+
+        .logo span {
+            color: #2a6bb3;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2a6bb3;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #2a6bb3;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .contact-btn {
+            background-color: #2a6bb3;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: #1a3a5f;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2a6bb3 100%);
+            color: white;
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #1a3a5f;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #2a6bb3;
+            color: white;
+            border-color: #2a6bb3;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.05);
+        }
+
+        .member-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26, 58, 95, 0.9), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .team-member:hover .member-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-info h3 {
+            font-size: 1.4rem;
+            color: #1a3a5f;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: #2a6bb3;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .member-expertise {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            color: #777;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-contact {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2a6bb3;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: #2a6bb3;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .member-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a3a5f;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        /* Leadership Section */
+        .leadership-section {
+            background: white;
+            padding: 5rem 5%;
+            margin: 2rem auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 1400px;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .leader-card {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .leader-image {
+            width: 150px;
+            flex-shrink: 0;
+        }
+
+        .leader-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .leader-info {
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        .leader-info h3 {
+            font-size: 1.3rem;
+            color: #1a3a5f;
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-role {
+            color: #2a6bb3;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .leader-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2a6bb3 100%);
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem auto;
+            max-width: 1400px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #2a6bb3;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: #2a6bb3;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a3a5f;
+            color: white;
+            padding: 4rem 5% 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: #4CAF50;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 2rem;
+            text-align: center;
+            color: #b0b0b0;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .leader-card {
+                flex-direction: column;
+            }
+            
+            .leader-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Justice<span>Law</span> Partners</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="team.html" style="color: #2a6bb3;">Team</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="contact-btn">Contact Us</button>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header fade-in">
+        <h1>Meet Our Legal Team</h1>
+        <p>Experienced attorneys dedicated to achieving justice and delivering exceptional legal representation for our clients.</p>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="section-header fade-in">
+            <h2>Our Legal Experts</h2>
+            <p>Specialized attorneys with decades of combined experience across various practice areas</p>
+        </div>
+
+        <div class="team-filters fade-in delay-1">
+            <button class="filter-btn active" data-filter="all">All Attorneys</button>
+            <button class="filter-btn" data-filter="corporate">Corporate Law</button>
+            <button class="filter-btn" data-filter="litigation">Litigation</button>
+            <button class="filter-btn" data-filter="family">Family Law</button>
+            <button class="filter-btn" data-filter="intellectual">Intellectual Property</button>
+        </div>
+
+        <div class="team-grid">
+            <!-- Attorney 1 -->
+            <div class="team-member fade-in" data-category="corporate intellectual">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Sarah Johnson">
+                    <div class="member-overlay">
+                        <h3>Sarah Johnson</h3>
+                        <p>Senior Partner</p>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Sarah Johnson</h3>
+                    <div class="member-role">Senior Partner</div>
+                    <div class="member-expertise">Corporate Law & Intellectual Property</div>
+                    <p class="member-bio">With over 20 years of experience, Sarah specializes in corporate law and intellectual property rights. She has successfully represented Fortune 500 companies in high-stakes negotiations.</p>
+                    <div class="member-contact">
+                        <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="contact-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="contact-link"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                    <div class="member-stats">
+                        <div class="stat">
+                            <div class="stat-value">20+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">250+</div>
+                            <div class="stat-label">Cases Handled</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attorney 2 -->
+            <div class="team-member fade-in delay-1" data-category="litigation">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Michael Chen">
+                    <div class="member-overlay">
+                        <h3>Michael Chen</h3>
+                        <p>Litigation Partner</p>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Michael Chen</h3>
+                    <div class="member-role">Litigation Partner</div>
+                    <div class="member-expertise">Civil & Commercial Litigation</div>
+                    <p class="member-bio">Michael is a seasoned litigator with a remarkable 95% success rate in civil and commercial cases. His strategic approach to complex litigation has resulted in numerous favorable verdicts.</p>
+                    <div class="member-contact">
+                        <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="contact-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="contact-link"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                    <div class="member-stats">
+                        <div class="stat">
+                            <div class="stat-value">15+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">180+</div>
+                            <div class="stat-label">Cases Handled</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">95%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attorney 3 -->
+            <div class="team-member fade-in delay-2" data-category="corporate intellectual">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Elena Rodriguez">
+                    <div class="member-overlay">
+                        <h3>Elena Rodriguez</h3>
+                        <p>Managing Partner</p>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Elena Rodriguez</h3>
+                    <div class="member-role">Managing Partner</div>
+                    <div class="member-expertise">Business Law & Intellectual Property</div>
+                    <p class="member-bio">Elena leads our firm with expertise in business law and intellectual property. She has helped numerous startups and established businesses navigate complex legal landscapes.</p>
+                    <div class="member-contact">
+                        <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="contact-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="contact-link"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                    <div class="member-stats">
+                        <div class="stat">
+                            <div class="stat-value">18+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">300+</div>
+                            <div class="stat-label">Clients Served</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">99%</div>
+                            <div class="stat-label">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attorney 4 -->
+            <div class="team-member fade-in delay-3" data-category="family litigation">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Jennifer Wallace">
+                    <div class="member-overlay">
+                        <h3>Jennifer Wallace</h3>
+                        <p>Family Law Specialist</p>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Jennifer Wallace</h3>
+                    <div class="member-role">Family Law Specialist</div>
+                    <div class="member-expertise">Divorce, Custody & Mediation</div>
+                    <p class="member-bio">Jennifer brings compassion and expertise to family law matters. She specializes in divorce, child custody, and mediation, helping families navigate difficult transitions with dignity.</p>
+                    <div class="member-contact">
+                        <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="contact-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="contact-link"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                    <div class="member-stats">
+                        <div class="stat">
+                            <div class="stat-value">12+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">150+</div>
+                            <div class="stat-label">Cases Resolved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">Mediation Success</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attorney 5 -->
+            <div class="team-member fade-in" data-category="litigation">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Robert Hayes">
+                    <div class="member-overlay">
+                        <h3>Robert Hayes</h3>
+                        <p>Criminal Defense Attorney</p>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>Robert Hayes</h3>
+                    <div class="member-role">Criminal Defense Attorney</div>
+                    <div class="member-expertise">Criminal Law & Defense Strategy</div>
+                    <p class="member-bio">Robert is a formidable criminal defense attorney known for his meticulous case preparation and courtroom presence. He has successfully defended clients in high-profile criminal cases.</p>
+                    <div class="member-contact">
+                        <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="contact-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="contact-link"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                    <div class="member-stats">
+                        <div class="stat">
+                            <div class="stat-value">14+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">200+</div>
+                            <div class="stat-label">Cases Defended</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">92%</div>
+                            <div class="stat-label">Favorable Outcomes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attorney 6 -->
+            <div class="team-member fade-in delay-1" data-category="corporate">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1551836026-d5c88acce83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="David Thompson">
+                    <div class="member-overlay">
+                        <h3>David Thompson</h3>
+                        <p>Corporate Counsel</p>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>David Thompson</h3>
+                    <div class="member-role">Corporate Counsel</div>
+                    <div class="member-expertise">Mergers, Acquisitions & Compliance</div>
+                    <p class="member-bio">David specializes in corporate transactions, including mergers, acquisitions, and regulatory compliance. His strategic advice has guided businesses through complex legal challenges.</p>
+                    <div class="member-contact">
+                        <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="contact-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="contact-link"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                    <div class="member-stats">
+                        <div class="stat">
+                            <div class="stat-value">16+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">75+</div>
+                            <div class="stat-label">M&A Deals</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">Regulatory Compliance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="leadership-section">
+        <div class="section-header fade-in">
+            <h2>Firm Leadership</h2>
+            <p>Our partners who guide the strategic direction of Justice Law Partners</p>
+        </div>
+
+        <div class="leadership-grid">
+            <div class="leader-card fade-in">
+                <div class="leader-image">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Sarah Johnson">
+                </div>
+                <div class="leader-info">
+                    <h3>Sarah Johnson</h3>
+                    <div class="leader-role">Senior Partner & Co-Founder</div>
+                    <p class="leader-bio">Sarah co-founded Justice Law Partners in 1995 with a vision to create a firm that prioritizes client success above all else. Under her leadership, the firm has grown into a regional powerhouse.</p>
+                </div>
+            </div>
+
+            <div class="leader-card fade-in delay-1">
+                <div class="leader-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Elena Rodriguez">
+                </div>
+                <div class="leader-info">
+                    <h3>Elena Rodriguez</h3>
+                    <div class="leader-role">Managing Partner</div>
+                    <p class="leader-bio">Elena oversees the firm's operations and strategic direction. Her innovative approach to legal practice has positioned Justice Law Partners at the forefront of the legal industry.</p>
+                </div>
+            </div>
+
+            <div class="leader-card fade-in delay-2">
+                <div class="leader-image">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Michael Chen">
+                </div>
+                <div class="leader-info">
+                    <h3>Michael Chen</h3>
+                    <div class="leader-role">Litigation Partner</div>
+                    <p class="leader-bio">Michael leads our litigation department, bringing his exceptional trial skills and strategic thinking to complex legal disputes. His leadership has resulted in numerous landmark victories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section fade-in">
+        <h2>Schedule a Consultation With Our Team</h2>
+        <p>Contact us today to discuss your legal needs with one of our experienced attorneys.</p>
+        <div class="cta-buttons">
+            <a href="contact.html" class="btn btn-primary">Schedule Consultation</a>
+            <a href="services.html" class="btn btn-secondary">View Our Services</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Justice<span>Law</span> Partners</div>
+                    <p style="color: #b0b0b0; margin-bottom: 1rem;">Providing exceptional legal representation since 1995.</p>
+                    <div style="color: #b0b0b0;">
+                        <p>123 Legal Avenue, Suite 500</p>
+                        <p>New York, NY 10001</p>
+                        <p>+1 (555) 123-4567</p>
+                        <p>info@justicelawpartners.com</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Practice Areas</h3>
+                    <ul style="list-style: none; color: #b0b0b0;">
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Criminal Defense</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Personal Injury</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Family Law</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Business Law</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
+                    <ul style="list-style: none; color: #b0b0b0;">
+                        <li><a href="index.html" style="color: #b0b0b0; text-decoration: none;">Home</a></li>
+                        <li><a href="about.html" style="color: #b0b0b0; text-decoration: none;">About</a></li>
+                        <li><a href="services.html" style="color: #b0b0b0; text-decoration: none;">Services</a></li>
+                        <li><a href="team.html" style="color: #b0b0b0; text-decoration: none;">Team</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Justice Law Partners. All rights reserved. | <a href="#" style="color: #b0b0b0; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #b0b0b0; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add scroll effect to nav bar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '1rem 5%';
+                nav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.padding = '1.5rem 5%';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Initial check
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+
+            // Team filtering functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const teamMembers = document.querySelectorAll('.team-member');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    teamMembers.forEach(member => {
+                        if (filterValue === 'all' || member.getAttribute('data-category').includes(filterValue)) {
+                            member.style.display = 'block';
+                        } else {
+                            member.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
