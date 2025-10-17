@@ -3,490 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legal Insights Carousel</title>
+    <title>About Us - Justice Law Partners</title>
+    <link rel="stylesheet" href="styles/about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .blog-carousel-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 4rem 3rem;
-            max-width: 1200px;
-            width: 100%;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.8rem;
-            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .section-header p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            gap: 2rem;
-        }
-
-        .blog-card {
-            flex: 0 0 calc(33.333% - 1.34rem);
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .blog-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-image {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .blog-card:hover .card-image img {
-            transform: scale(1.1);
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card-content {
-            padding: 2rem;
-        }
-
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .card-date {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card-date i {
-            color: #2a6bb3;
-        }
-
-        .card-content h3 {
-            font-size: 1.4rem;
-            color: #1a3a5f;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-            font-weight: 600;
-        }
-
-        .card-content p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
-        }
-
-        .author {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .author-info h4 {
-            font-size: 0.9rem;
-            color: #1a3a5f;
-            margin-bottom: 0.2rem;
-        }
-
-        .author-info span {
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .read-more {
-            background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.9rem;
-        }
-
-        .read-more:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(42, 107, 179, 0.4);
-        }
-
-        .carousel-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 3rem;
-        }
-
-        .nav-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid #2a6bb3;
-            background: white;
-            color: #2a6bb3;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .nav-btn:hover {
-            background: #2a6bb3;
-            color: white;
-            transform: scale(1.1);
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #2a6bb3;
-            transform: scale(1.2);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .blog-card {
-                flex: 0 0 calc(50% - 1rem);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .blog-carousel-section {
-                padding: 2rem 1.5rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2.2rem;
-            }
-            
-            .blog-card {
-                flex: 0 0 100%;
-            }
-            
-            .carousel-track {
-                gap: 1.5rem;
-            }
-        }
-    </style>
+   
 </head>
 <body>
-    <section class="blog-carousel-section">
-        <div class="section-header">
-            <h2>Latest Legal Insights</h2>
-            <p>Fresh perspectives and expert analysis from our legal team</p>
-        </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Justice<span>Law</span> Partners</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" style="color: #2a6bb3;">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="contact-btn">Contact Us</button>
+    </nav>
 
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Blog Post 1 -->
-                <article class="blog-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Employment Law">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span class="card-date">
-                                <i class="far fa-calendar"></i>
-                                2 days ago
-                            </span>
-                        </div>
-                        <h3>New Employment Law Changes Taking Effect in 2024</h3>
-                        <p>Major updates to workplace regulations that every employer and employee should understand for compliance and protection.</p>
-                        <div class="card-footer">
-                            <div class="author">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson" class="author-avatar">
-                                <div class="author-info">
-                                    <h4>Sarah Johnson</h4>
-                                    <span>Senior Partner</span>
-                                </div>
-                            </div>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </article>
+    <!-- Page Header -->
+    <section class="page-header fade-in">
+        <h1>About Justice Law Partners</h1>
+        <p>With over 50 years of combined experience, we are committed to delivering exceptional legal representation and achieving justice for our clients.</p>
+    </section>
 
-                <!-- Blog Post 2 -->
-                <article class="blog-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Real Estate">
-                        <span class="card-badge">Hot Topic</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span class="card-date">
-                                <i class="far fa-calendar"></i>
-                                1 week ago
-                            </span>
-                        </div>
-                        <h3>Understanding Your Rights as a Tenant in Today's Market</h3>
-                        <p>Essential guide to tenant rights, lease agreements, and what to do when facing landlord disputes or unfair practices.</p>
-                        <div class="card-footer">
-                            <div class="author">
-                                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Michael Chen" class="author-avatar">
-                                <div class="author-info">
-                                    <h4>Michael Chen</h4>
-                                    <span>Litigation Attorney</span>
-                                </div>
-                            </div>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article class="blog-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Business Law">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span class="card-date">
-                                <i class="far fa-calendar"></i>
-                                3 weeks ago
-                            </span>
-                        </div>
-                        <h3>Protecting Your Business: Essential Contract Clauses</h3>
-                        <p>Learn which contract provisions are crucial for business protection and how to avoid common legal pitfalls in agreements.</p>
-                        <div class="card-footer">
-                            <div class="author">
-                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Elena Rodriguez" class="author-avatar">
-                                <div class="author-info">
-                                    <h4>Elena Rodriguez</h4>
-                                    <span>Business Law Expert</span>
-                                </div>
-                            </div>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Post 4 -->
-                <article class="blog-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Family Law">
-                        <span class="card-badge">New</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span class="card-date">
-                                <i class="far fa-calendar"></i>
-                                1 day ago
-                            </span>
-                        </div>
-                        <h3>Navigating Child Custody: What Every Parent Should Know</h3>
-                        <p>Comprehensive guide to child custody laws, mediation processes, and protecting your parental rights during separation.</p>
-                        <div class="card-footer">
-                            <div class="author">
-                                <img src="https://images.unsplash.com/photo-1551836026-d5c88ac5c4e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="David Park" class="author-avatar">
-                                <div class="author-info">
-                                    <h4>David Park</h4>
-                                    <span>Family Law Attorney</span>
-                                </div>
-                            </div>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </article>
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h2>Our Story & Commitment</h2>
+                <p>Founded in 1995, Justice Law Partners has grown from a small practice into one of the most respected law firms in the region. Our journey began with a simple mission: to provide accessible, high-quality legal services to individuals and businesses alike.</p>
+                <p>Over the years, we've built our reputation on integrity, expertise, and an unwavering commitment to our clients' success. We believe that everyone deserves exceptional legal representation, regardless of their circumstances.</p>
+                <p>Our team of dedicated attorneys brings together diverse backgrounds and specialized knowledge, allowing us to handle even the most complex legal challenges with confidence and skill.</p>
             </div>
-        </div>
-
-        <div class="carousel-nav">
-            <button class="nav-btn" id="prevBtn">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="nav-btn" id="nextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-
-        <div class="carousel-dots" id="carouselDots">
-            <!-- Dots will be generated by JavaScript -->
+            <div class="about-image fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Our Law Firm">
+            </div>
         </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const track = document.getElementById('carouselTrack');
-            const cards = document.querySelectorAll('.blog-card');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const dotsContainer = document.getElementById('carouselDots');
-            
-            let currentIndex = 0;
-            const cardsPerView = getCardsPerView();
-            
-            // Create dots
-            cards.forEach((_, index) => {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                if (index === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(index));
-                dotsContainer.appendChild(dot);
-            });
-            
-            const dots = document.querySelectorAll('.dot');
-            
-            function getCardsPerView() {
-                if (window.innerWidth < 768) return 1;
-                if (window.innerWidth < 1024) return 2;
-                return 3;
-            }
-            
-            function updateCarousel() {
-                const cardWidth = cards[0].offsetWidth + 32; // card width + gap
-                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-                
-                // Update dots
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
-                });
-            }
-            
-            function goToSlide(index) {
-                currentIndex = index;
-                updateCarousel();
-            }
-            
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % (cards.length - cardsPerView + 1);
-                updateCarousel();
-            }
-            
-            function prevSlide() {
-                currentIndex = currentIndex === 0 ? cards.length - cardsPerView : currentIndex - 1;
-                updateCarousel();
-            }
-            
-            // Auto-rotate every 5 seconds
-            let autoSlide = setInterval(nextSlide, 5000);
-            
-            // Pause auto-rotate on hover
-            track.addEventListener('mouseenter', () => clearInterval(autoSlide));
-            track.addEventListener('mouseleave', () => {
-                autoSlide = setInterval(nextSlide, 5000);
-            });
-            
-            // Event listeners
-            nextBtn.addEventListener('click', nextSlide);
-            prevBtn.addEventListener('click', prevSlide);
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                currentIndex = 0;
-                updateCarousel();
-            });
-            
-            // Initialize
-            updateCarousel();
-        });
-    </script>
+    <!-- Mission & Values -->
+    <section class="mission-values">
+        <div class="section-header fade-in">
+            <h2>Our Mission & Values</h2>
+            <p>The principles that guide our practice and define our commitment to excellence</p>
+        </div>
+        <div class="values-grid">
+            <div class="value-card fade-in">
+                <div class="value-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Justice & Integrity</h3>
+                <p>We uphold the highest ethical standards and fight tirelessly for justice in every case we handle.</p>
+            </div>
+            <div class="value-card fade-in delay-1">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Client-First Approach</h3>
+                <p>Your needs and objectives are at the center of everything we do. We listen, understand, and deliver.</p>
+            </div>
+            <div class="value-card fade-in delay-2">
+                <div class="value-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Expertise & Excellence</h3>
+                <p>Continuous learning and specialization ensure we provide the most current and effective legal strategies.</p>
+            </div>
+            <div class="value-card fade-in delay-3">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Trust & Transparency</h3>
+                <p>We build lasting relationships based on open communication, honesty, and mutual respect.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+        <div class="section-header fade-in">
+            <h2>Our Journey</h2>
+            <p>Milestones that shaped our firm's growth and success</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-year">1995</div>
+                    <h3>Foundation</h3>
+                    <p>Justice Law Partners was founded with a vision to provide accessible legal services to the community.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-1">
+                <div class="timeline-content">
+                    <div class="timeline-year">2002</div>
+                    <h3>Expansion</h3>
+                    <p>Expanded our practice areas to include corporate law and established our business division.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-2">
+                <div class="timeline-content">
+                    <div class="timeline-year">2010</div>
+                    <h3>Recognition</h3>
+                    <p>Received the "Law Firm of the Year" award for outstanding client service and legal excellence.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-3">
+                <div class="timeline-content">
+                    <div class="timeline-year">2018</div>
+                    <h3>Modernization</h3>
+                    <p>Implemented advanced technology and digital solutions to enhance client experience and efficiency.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-1">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023</div>
+                    <h3>Growth</h3>
+                    <p>Expanded our team to 15 attorneys and opened our second office location downtown.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Preview -->
+    <section class="team-preview">
+        <div class="section-header fade-in">
+            <h2>Meet Our Leadership</h2>
+            <p>Experienced attorneys dedicated to your success</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member fade-in">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson">
+                </div>
+                <h3>Sarah Johnson</h3>
+                <div class="role">Senior Partner</div>
+                <p>Corporate Law Specialist with 20+ years experience</p>
+            </div>
+            <div class="team-member fade-in delay-1">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Michael Chen">
+                </div>
+                <h3>Michael Chen</h3>
+                <div class="role">Litigation Partner</div>
+                <p>Civil litigation expert with 95% success rate</p>
+            </div>
+            <div class="team-member fade-in delay-2">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Elena Rodriguez">
+                </div>
+                <h3>Elena Rodriguez</h3>
+                <div class="role">Managing Partner</div>
+                <p>Business law and intellectual property expert</p>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="team.html" class="view-team-btn fade-in delay-3">View Full Team</a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section fade-in">
+        <h2>Ready to Discuss Your Legal Needs?</h2>
+        <p>Contact us today for a confidential consultation with our experienced legal team.</p>
+        <div class="cta-buttons">
+            <a href="contact.html" class="btn btn-primary">Schedule Consultation</a>
+            <a href="services.html" class="btn btn-secondary">View Our Services</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Justice<span>Law</span> Partners</div>
+                    <p style="color: #b0b0b0; margin-bottom: 1rem;">Providing exceptional legal representation since 1995.</p>
+                    <div style="color: #b0b0b0;">
+                        <p>123 Legal Avenue, Suite 500</p>
+                        <p>New York, NY 10001</p>
+                        <p>+1 (555) 123-4567</p>
+                        <p>info@justicelawpartners.com</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Practice Areas</h3>
+                    <ul style="list-style: none; color: #b0b0b0;">
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Criminal Defense</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Personal Injury</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Family Law</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Business Law</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
+                    <ul style="list-style: none; color: #b0b0b0;">
+                        <li><a href="index.html" style="color: #b0b0b0; text-decoration: none;">Home</a></li>
+                        <li><a href="about.html" style="color: #b0b0b0; text-decoration: none;">About</a></li>
+                        <li><a href="services.html" style="color: #b0b0b0; text-decoration: none;">Services</a></li>
+                        <li><a href="team.html" style="color: #b0b0b0; text-decoration: none;">Team</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Justice Law Partners. All rights reserved. | <a href="#" style="color: #b0b0b0; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #b0b0b0; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+   <script src="script/about.js"></script>
 </body>
 </html>
