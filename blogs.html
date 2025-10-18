@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Insights - Justice Law Partners</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a3a5f;
+        }
+
+        .logo span {
+            color: #2a6bb3;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2a6bb3;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #2a6bb3;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .contact-btn {
+            background-color: #2a6bb3;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: #1a3a5f;
+        }
+
+        /* Hero Section */
+        .blog-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(42, 107, 179, 0.7)), 
+                        url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #1a3a5f;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #2a6bb3;
+            color: white;
+            border-color: #2a6bb3;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #2a6bb3;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .blog-meta span {
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-meta i {
+            margin-right: 0.5rem;
+            color: #2a6bb3;
+        }
+
+        .blog-content h3 {
+            font-size: 1.4rem;
+            color: #1a3a5f;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: #2a6bb3;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #1a3a5f;
+            transform: translateX(5px);
+        }
+
+        .read-more i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Featured Post */
+        .featured-post {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .featured-image {
+            height: 400px;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-content .blog-category {
+            position: static;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .featured-content h2 {
+            font-size: 2rem;
+            color: #1a3a5f;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .featured-content .blog-excerpt {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 0.5rem;
+            border-radius: 50%;
+            background: #f0f4f8;
+            color: #666;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pagination a.active, .pagination a:hover {
+            background: #2a6bb3;
+            color: white;
+        }
+
+        .pagination a.prev, .pagination a.next {
+            width: auto;
+            padding: 0 1.5rem;
+            border-radius: 20px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2a6bb3 100%);
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem auto;
+            max-width: 1400px;
+        }
+
+        .newsletter-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: white;
+            color: #2a6bb3;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 0 4px 4px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #f8f9fa;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a3a5f;
+            color: white;
+            padding: 4rem 5% 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: #4CAF50;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 2rem;
+            text-align: center;
+            color: #b0b0b0;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .featured-post {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-image {
+                height: 300px;
+            }
+
+            .blog-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .blog-hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Justice<span>Law</span> Partners</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="blog.html" style="color: #2a6bb3;">Insights</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="contact-btn">Contact Us</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="blog-hero fade-in">
+        <div class="hero-content">
+            <h1>Legal Insights & Resources</h1>
+            <p>Stay informed with the latest legal developments, analysis, and expert perspectives from our team of attorneys.</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="section-header fade-in">
+            <h2>Latest Legal Insights</h2>
+            <p>Expert analysis on current legal topics and developments</p>
+        </div>
+
+        <div class="blog-filters fade-in delay-1">
+            <button class="filter-btn active" data-filter="all">All Topics</button>
+            <button class="filter-btn" data-filter="corporate">Corporate Law</button>
+            <button class="filter-btn" data-filter="litigation">Litigation</button>
+            <button class="filter-btn" data-filter="intellectual">Intellectual Property</button>
+            <button class="filter-btn" data-filter="employment">Employment Law</button>
+        </div>
+
+        <!-- Featured Post -->
+        <div class="featured-post fade-in">
+            <div class="featured-image">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Featured Post">
+            </div>
+            <div class="featured-content">
+                <span class="blog-category">Corporate Law</span>
+                <h2>Navigating the New Corporate Transparency Act: What Businesses Need to Know</h2>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar"></i> October 15, 2023</span>
+                    <span><i class="far fa-user"></i> Sarah Johnson</span>
+                    <span><i class="far fa-clock"></i> 8 min read</span>
+                </div>
+                <p class="blog-excerpt">The Corporate Transparency Act introduces significant reporting requirements for businesses. Our comprehensive guide explains who needs to comply, what information must be reported, and the deadlines you need to know to avoid penalties.</p>
+                <a href="https://kbscpa.com/navigating-the-corporate-transparency-act-what-business-owners-need-to-know/" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <!-- Blog Post 1 -->
+            <div class="blog-card fade-in" data-category="intellectual">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="IP Protection">
+                    <span class="blog-category">Intellectual Property</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> October 10, 2023</span>
+                        <span><i class="far fa-user"></i> Elena Rodriguez</span>
+                    </div>
+                    <h3>Protecting Your Intellectual Property in the Digital Age</h3>
+                    <p class="blog-excerpt">As technology evolves, so do the challenges of protecting intellectual property. Learn about the latest strategies for safeguarding your patents, trademarks, and copyrights in an increasingly digital world.</p>
+                    <a href="https://iipgh.org/protecting-intellectual-property-in-the-digital-age-strategies-for-businesses/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 2 -->
+            <div class="blog-card fade-in delay-1" data-category="litigation">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Litigation Trends">
+                    <span class="blog-category">Litigation</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> October 5, 2023</span>
+                        <span><i class="far fa-user"></i> Michael Chen</span>
+                    </div>
+                    <h3>Emerging Trends in Commercial Litigation for 2024</h3>
+                    <p class="blog-excerpt">Commercial litigation is evolving with new technologies and changing regulations. Discover the key trends that will shape business disputes in the coming year and how to prepare your organization.</p>
+                    <a href="https://www.hausfeld.com/what-we-think/perspectives-blogs/2024-year-in-review-commercial-disputes" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 3 -->
+            <div class="blog-card fade-in delay-2" data-category="employment">
+                <div class="blog-image">
+                    <img src="images/remote.jpg" alt="Employment Law">
+                    <span class="blog-category">Employment Law</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> September 28, 2023</span>
+                        <span><i class="far fa-user"></i> David Thompson</span>
+                    </div>
+                    <h3>Remote Work Policies: Legal Considerations for Employers</h3>
+                    <p class="blog-excerpt">The shift to remote work continues to present legal challenges for employers. This article covers essential considerations for creating compliant remote work policies that protect both employees and organizations.</p>
+                    <a href="https://nativeteams.com/blog/legal-issues-in-remote-work" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 4 -->
+            <div class="blog-card fade-in" data-category="corporate">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="M&A">
+                    <span class="blog-category">Corporate Law</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> September 20, 2023</span>
+                        <span><i class="far fa-user"></i> Sarah Johnson</span>
+                    </div>
+                    <h3>M&A Due Diligence: Key Legal Considerations in 2023</h3>
+                    <p class="blog-excerpt">Mergers and acquisitions require thorough due diligence to mitigate risks. Our guide highlights the most critical legal areas to examine in today's business environment to ensure successful transactions.</p>
+                    <a href="https://www.okbar.org/barjournal/september-2023/general-corporate-due-diligence-in-mergers-and-acquisitions-transactions/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 5 -->
+            <div class="blog-card fade-in delay-1" data-category="intellectual">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Trademark">
+                    <span class="blog-category">Intellectual Property</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> September 15, 2023</span>
+                        <span><i class="far fa-user"></i> Elena Rodriguez</span>
+                    </div>
+                    <h3>Trademark Protection Strategies for Growing Businesses</h3>
+                    <p class="blog-excerpt">Building a strong brand requires effective trademark protection. Learn about strategic approaches to trademark registration, monitoring, and enforcement that can safeguard your business identity.</p>
+                    <a href="https://unitedlex.com/insights/eight-trademark-protection-strategies-for-future-proofing-a-brand/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 6 -->
+            <div class="blog-card fade-in delay-2" data-category="litigation">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Contract Disputes">
+                    <span class="blog-category">Litigation</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> September 10, 2023</span>
+                        <span><i class="far fa-user"></i> Michael Chen</span>
+                    </div>
+                    <h3>Resolving Contract Disputes: Litigation vs. Alternative Methods</h3>
+                    <p class="blog-excerpt">When contract disputes arise, businesses face important decisions about resolution methods. This analysis compares litigation with mediation and arbitration to help you choose the best approach.</p>
+                    <a href="https://www.pon.harvard.edu/daily/dispute-resolution/what-are-the-three-basic-types-of-dispute-resolution-what-to-know-about-mediation-arbitration-and-litigation/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination fade-in">
+            <a href="#" class="prev"><i class="fas fa-chevron-left"></i> Previous</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#" class="next">Next <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section fade-in">
+        <h2>Stay Updated With Legal Insights</h2>
+        <p>Subscribe to our newsletter to receive the latest legal updates, analysis, and resources directly to your inbox.</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Justice<span>Law</span> Partners</div>
+                    <p style="color: #b0b0b0; margin-bottom: 1rem;">Providing exceptional legal representation since 1995.</p>
+                    <div style="color: #b0b0b0;">
+                        <p>123 Legal Avenue, Suite 500</p>
+                        <p>New York, NY 10001</p>
+                        <p>+1 (555) 123-4567</p>
+                        <p>info@justicelawpartners.com</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Practice Areas</h3>
+                    <ul style="list-style: none; color: #b0b0b0;">
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Criminal Defense</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Personal Injury</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Family Law</a></li>
+                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Business Law</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
+                    <ul style="list-style: none; color: #b0b0b0;">
+                        <li><a href="index.html" style="color: #b0b0b0; text-decoration: none;">Home</a></li>
+                        <li><a href="about.html" style="color: #b0b0b0; text-decoration: none;">About</a></li>
+                        <li><a href="services.html" style="color: #b0b0b0; text-decoration: none;">Services</a></li>
+                        <li><a href="team.html" style="color: #b0b0b0; text-decoration: none;">Team</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Justice Law Partners. All rights reserved. | <a href="#" style="color: #b0b0b0; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #b0b0b0; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add scroll effect to nav bar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '1rem 5%';
+                nav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.padding = '1.5rem 5%';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Initial check
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+
+            // Blog filtering functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const blogCards = document.querySelectorAll('.blog-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    blogCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
