@@ -6,7 +6,7 @@
     <title>About Us - Justice Law Partners</title>
     <link rel="stylesheet" href="styles/about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
+  
 </head>
 <body>
     <!-- Navigation -->
@@ -14,12 +14,17 @@
         <div class="logo">Justice<span>Law</span> Partners</div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" style="color: #2a6bb3;">About</a></li>
+            <li><a href="about.html" style="color: var(--secondary-color);">About</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="contact.html">Legal Advice Section</a></li>
         </ul>
-        <button class="contact-btn">Contact Us</button>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="contact-btn">Contact Us</button>
+        </div>
     </nav>
 
     <!-- Page Header -->
@@ -179,8 +184,8 @@
             <div class="footer-content">
                 <div>
                     <div class="footer-logo">Justice<span>Law</span> Partners</div>
-                    <p style="color: #b0b0b0; margin-bottom: 1rem;">Providing exceptional legal representation since 1995.</p>
-                    <div style="color: #b0b0b0;">
+                    <p style="color: var(--footer-text); margin-bottom: 1rem;">Providing exceptional legal representation since 1995.</p>
+                    <div style="color: var(--footer-text);">
                         <p>123 Legal Avenue, Suite 500</p>
                         <p>New York, NY 10001</p>
                         <p>+1 (555) 123-4567</p>
@@ -189,37 +194,38 @@
                 </div>
                 <div>
                     <h3 style="color: white; margin-bottom: 1rem;">Practice Areas</h3>
-                    <ul style="list-style: none; color: #b0b0b0;">
-                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Criminal Defense</a></li>
-                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Personal Injury</a></li>
-                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Family Law</a></li>
-                        <li><a href="#" style="color: #b0b0b0; text-decoration: none;">Business Law</a></li>
+                    <ul style="list-style: none; color: var(--footer-text);">
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Criminal Defense</a></li>
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Personal Injury</a></li>
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Family Law</a></li>
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Business Law</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
-                    <ul style="list-style: none; color: #b0b0b0;">
-                        <li><a href="index.html" style="color: #b0b0b0; text-decoration: none;">Home</a></li>
-                        <li><a href="about.html" style="color: #b0b0b0; text-decoration: none;">About</a></li>
-                        <li><a href="services.html" style="color: #b0b0b0; text-decoration: none;">Services</a></li>
-                        <li><a href="team.html" style="color: #b0b0b0; text-decoration: none;">Team</a></li>
+                    <ul style="list-style: none; color: var(--footer-text);">
+                        <li><a href="index.html" style="color: var(--footer-text); text-decoration: none;">Home</a></li>
+                        <li><a href="about.html" style="color: var(--footer-text); text-decoration: none;">About</a></li>
+                        <li><a href="services.html" style="color: var(--footer-text); text-decoration: none;">Services</a></li>
+                        <li><a href="team.html" style="color: var(--footer-text); text-decoration: none;">Team</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
                     <div style="display: flex; gap: 1rem;">
-                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: #b0b0b0; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: var(--footer-text); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: var(--footer-text); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--footer-text); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Justice Law Partners. All rights reserved. | <a href="#" style="color: #b0b0b0; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #b0b0b0; text-decoration: none;">Terms of Service</a></p>
+                <p>&copy; 2025 Justice Law Partners. All rights reserved. | <a href="#" style="color: var(--footer-text); text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: var(--footer-text); text-decoration: none;">Terms of Service</a></p>
             </div>
         </div>
     </footer>
 
-   <script src="script/about.js"></script>
+    <script src="script/about.js">
+    </script>
 </body>
 </html>
