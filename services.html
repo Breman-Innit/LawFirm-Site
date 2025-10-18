@@ -3,529 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Legal Support</title>
+    <title>Our Services - Justice Law Partners</title>
+    <link rel="stylesheet" href="styles/services.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .instant-support {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 4rem 3rem;
-            max-width: 800px;
-            width: 100%;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .instant-support::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #2a6bb3, #1a3a5f, #2a6bb3);
-            background-size: 200% 100%;
-            animation: shimmer 3s infinite linear;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .support-content h2 {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #1a3a5f, #2a6bb3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .support-content p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .support-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(76, 175, 80, 0.1);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            margin-bottom: 2.5rem;
-            border: 2px solid rgba(76, 175, 80, 0.2);
-            animation: pulse-glow 2s infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 30px rgba(76, 175, 80, 0.5);
-                transform: scale(1.02);
-            }
-        }
-
-        .online-indicator {
-            width: 12px;
-            height: 12px;
-            background: #4CAF50;
-            border-radius: 50%;
-            position: relative;
-            animation: pulse 2s infinite;
-        }
-
-        .online-indicator::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            background: #4CAF50;
-            border-radius: 50%;
-            opacity: 0.4;
-            animation: ripple 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        @keyframes ripple {
-            0% { transform: scale(0.8); opacity: 0.4; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-
-        .support-status span {
-            font-weight: 600;
-            color: #2d5016;
-            font-size: 1.1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #2a6bb3, #1a3a5f);
-            color: white;
-            border: none;
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(42, 107, 179, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(42, 107, 179, 0.4);
-        }
-
-        .btn-primary:active {
-            transform: translateY(-1px);
-        }
-
-        /* Live typing indicator */
-        .typing-indicator {
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .typing-dots {
-            display: flex;
-            gap: 4px;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #666;
-            border-radius: 50%;
-            animation: typing 1.4s infinite ease-in-out;
-        }
-
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-            40% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Quick questions */
-        .quick-questions {
-            margin-top: 2.5rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eee;
-        }
-
-        .quick-questions h3 {
-            color: #1a3a5f;
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .question-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .question-btn {
-            background: white;
-            border: 2px solid #e9ecef;
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            color: #333;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .question-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #2a6bb3;
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .question-btn:hover::before {
-            transform: scaleY(1);
-        }
-
-        .question-btn:hover {
-            border-color: #2a6bb3;
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Response bubble */
-        .response-bubble {
-            display: none;
-            background: #2a6bb3;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 20px;
-            margin-top: 1rem;
-            text-align: left;
-            animation: slideUp 0.5s ease;
-            position: relative;
-        }
-
-        .response-bubble::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid #2a6bb3;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Online users */
-        .online-users {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(42, 107, 179, 0.05);
-            border-radius: 15px;
-        }
-
-        .user-avatars {
-            display: flex;
-        }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: 2px solid white;
-            margin-left: -10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .user-avatar:first-child {
-            margin-left: 0;
-        }
-
-        .users-text {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .instant-support {
-                padding: 2rem 1.5rem;
-            }
-            
-            .support-content h2 {
-                font-size: 2rem;
-            }
-            
-            .question-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+   
 </head>
 <body>
-    <section class="instant-support">
-        <div class="support-content">
-            <h2>Need Immediate Legal Advice?</h2>
-            <p>Chat live with our legal assistants for quick guidance on your situation</p>
-            
-            <div class="support-status">
-                <span class="online-indicator"></span>
-                <span>Legal assistants online now</span>
-            </div>
-
-            <button class="btn-primary" id="startChat">
-                <i class="fas fa-comments"></i> Start Live Chat
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Justice<span>Law</span> Partners</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html" style="color: var(--secondary-color);">Services</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
             </button>
+            <button class="contact-btn">Contact Us</button>
+        </div>
+    </nav>
 
-            <!-- Live typing indicator -->
-            <div class="typing-indicator" id="typingIndicator">
-                <div class="typing-dots">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
+    <!-- Hero Section -->
+    <section class="services-hero fade-in">
+        <div class="hero-content">
+            <h1>Our Legal Services</h1>
+            <p>Comprehensive legal solutions tailored to your unique needs. Our experienced attorneys are here to guide you through every step of your legal journey.</p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <div class="section-header fade-in">
+            <h2>Comprehensive Legal Services</h2>
+            <p>We offer a wide range of legal services to individuals and businesses, providing expert guidance and representation across various practice areas.</p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="services-grid">
+            <!-- Corporate Law -->
+            <div class="service-card fade-in">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Corporate Law</h3>
+                    <p>Comprehensive legal services for businesses of all sizes, from startups to established corporations.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Business Formation & Structure</li>
+                        <li><i class="fas fa-check"></i> Contract Drafting & Review</li>
+                        <li><i class="fas fa-check"></i> Mergers & Acquisitions</li>
+                        <li><i class="fas fa-check"></i> Corporate Governance</li>
+                        <li><i class="fas fa-check"></i> Regulatory Compliance</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <span>Legal assistant is typing...</span>
             </div>
 
-            <!-- Online users -->
-            <div class="online-users">
-                <div class="user-avatars">
-                    <div class="user-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">JS</div>
-                    <div class="user-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">MC</div>
-                    <div class="user-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">ER</div>
-                </div>
-                <div class="users-text">
-                    <strong>3 people</strong> are getting help right now
+            <!-- Litigation -->
+            <div class="service-card fade-in delay-1">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Litigation</h3>
+                    <p>Aggressive representation in civil and commercial disputes with a track record of successful outcomes.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Civil Litigation</li>
+                        <li><i class="fas fa-check"></i> Commercial Disputes</li>
+                        <li><i class="fas fa-check"></i> Contract Disputes</li>
+                        <li><i class="fas fa-check"></i> Employment Litigation</li>
+                        <li><i class="fas fa-check"></i> Appellate Practice</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <!-- Quick questions -->
-            <div class="quick-questions">
-                <h3>Quick Questions</h3>
-                <div class="question-buttons">
-                    <button class="question-btn" data-question="accident">
-                        <i class="fas fa-car-crash"></i> What should I do after a car accident?
-                    </button>
-                    <button class="question-btn" data-question="employment">
-                        <i class="fas fa-briefcase"></i> My employer won't pay me - what are my rights?
-                    </button>
-                    <button class="question-btn" data-question="landlord">
-                        <i class="fas fa-home"></i> My landlord isn't making repairs - what can I do?
-                    </button>
-                    <button class="question-btn" data-question="injury">
-                        <i class="fas fa-user-injured"></i> Can I sue for emotional distress?
-                    </button>
+            <!-- Intellectual Property -->
+            <div class="service-card fade-in delay-2">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Intellectual Property</h3>
+                    <p>Protecting your innovations, brands, and creative works in an increasingly competitive marketplace.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Patent Registration</li>
+                        <li><i class="fas fa-check"></i> Trademark Protection</li>
+                        <li><i class="fas fa-check"></i> Copyright Registration</li>
+                        <li><i class="fas fa-check"></i> IP Licensing</li>
+                        <li><i class="fas fa-check"></i> IP Litigation</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
+            </div>
 
-                <!-- Response bubble -->
-                <div class="response-bubble" id="responseBubble">
-                    <strong>Quick Answer:</strong>
-                    <p id="responseText">Based on your situation, you may have legal options. Let's discuss your specific case in detail.</p>
-                    <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 1rem;">
-                        Discuss My Case
-                    </button>
+            <!-- Family Law -->
+            <div class="service-card fade-in">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Family Law</h3>
+                    <p>Compassionate guidance through family legal matters with sensitivity and expertise.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Divorce & Separation</li>
+                        <li><i class="fas fa-check"></i> Child Custody & Support</li>
+                        <li><i class="fas fa-check"></i> Prenuptial Agreements</li>
+                        <li><i class="fas fa-check"></i> Adoption</li>
+                        <li><i class="fas fa-check"></i> Mediation Services</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
+            </div>
+
+            <!-- Real Estate Law -->
+            <div class="service-card fade-in delay-1">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-house-user"></i>
+                    </div>
+                    <h3>Real Estate Law</h3>
+                    <p>Expert legal guidance for residential and commercial real estate transactions and disputes.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Property Transactions</li>
+                        <li><i class="fas fa-check"></i> Lease Agreements</li>
+                        <li><i class="fas fa-check"></i> Zoning & Land Use</li>
+                        <li><i class="fas fa-check"></i> Title Examination</li>
+                        <li><i class="fas fa-check"></i> Real Estate Litigation</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Employment Law -->
+            <div class="service-card fade-in delay-2">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Employment Law</h3>
+                    <p>Comprehensive employment law services for both employers and employees.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Employment Contracts</li>
+                        <li><i class="fas fa-check"></i> Workplace Policies</li>
+                        <li><i class="fas fa-check"></i> Discrimination Claims</li>
+                        <li><i class="fas fa-check"></i> Wrongful Termination</li>
+                        <li><i class="fas fa-check"></i> Compliance Training</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Section -->
+        <div class="process-section fade-in">
+            <div class="section-header">
+                <h2>Our Legal Process</h2>
+                <p>We follow a structured approach to ensure your legal matters are handled efficiently and effectively.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Initial Consultation</h3>
+                        <p>We begin with a comprehensive consultation to understand your legal needs and objectives.</p>
+                    </div>
+                </div>
+                <div class="process-step fade-in delay-1">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Case Evaluation</h3>
+                        <p>Our team conducts thorough research and analysis to develop the best legal strategy.</p>
+                    </div>
+                </div>
+                <div class="process-step fade-in delay-2">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Strategy Development</h3>
+                        <p>We create a customized legal strategy tailored to your specific situation and goals.</p>
+                    </div>
+                </div>
+                <div class="process-step fade-in delay-3">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Execution & Resolution</h3>
+                        <p>We diligently work toward achieving the best possible outcome for your case.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="why-choose-us">
+            <div class="section-header fade-in">
+                <h2>Why Choose Justice Law Partners</h2>
+                <p>Our commitment to excellence and client success sets us apart from other law firms.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Proven Track Record</h3>
+                    <p>With over 50 years of combined experience, we have a history of achieving successful outcomes for our clients.</p>
+                </div>
+                <div class="benefit-card fade-in delay-1">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Client-Focused Approach</h3>
+                    <p>We prioritize your needs and objectives, ensuring personalized attention and tailored legal solutions.</p>
+                </div>
+                <div class="benefit-card fade-in delay-2">
+                    <div class="benefit-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Ethical Practice</h3>
+                    <p>We uphold the highest ethical standards and are committed to transparency in all our dealings.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section fade-in">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our legal services and processes.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I schedule a consultation?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can schedule a consultation by calling our office at (555) 123-4567, filling out our online contact form, or emailing us at info@justicelawpartners.com. We typically respond within 24 hours to schedule your initial meeting.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What are your attorney fees?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our fee structure varies depending on the complexity of your case and the services required. We offer hourly rates, flat fees for certain services, and in some cases, contingency fees. During your initial consultation, we'll provide a clear explanation of our fees and payment options.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does a typical case take?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The duration of a case depends on many factors, including complexity, court schedules, and the willingness of parties to negotiate. Simple matters may resolve in weeks, while complex litigation can take months or years. We'll provide a realistic timeline during our initial assessment of your case.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer payment plans?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we understand that legal services can be a significant financial commitment. We offer flexible payment plans for many of our services. During your consultation, we can discuss payment options that work with your budget.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section fade-in">
+            <h2>Ready to Get Started?</h2>
+            <p>Contact us today to discuss your legal needs and learn how we can help you achieve your objectives.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">Schedule Consultation</a>
+                <a href="team.html" class="btn btn-secondary">Meet Our Team</a>
             </div>
         </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const startChatBtn = document.getElementById('startChat');
-            const typingIndicator = document.getElementById('typingIndicator');
-            const responseBubble = document.getElementById('responseBubble');
-            const responseText = document.getElementById('responseText');
-            const questionBtns = document.querySelectorAll('.question-btn');
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Justice<span>Law</span> Partners</div>
+                    <p style="color: var(--footer-text); margin-bottom: 1rem;">Providing exceptional legal representation since 1995.</p>
+                    <div style="color: var(--footer-text);">
+                        <p>123 Legal Avenue, Suite 500</p>
+                        <p>New York, NY 10001</p>
+                        <p>+1 (555) 123-4567</p>
+                        <p>info@justicelawpartners.com</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Practice Areas</h3>
+                    <ul style="list-style: none; color: var(--footer-text);">
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Corporate Law</a></li>
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Litigation</a></li>
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Intellectual Property</a></li>
+                        <li><a href="#" style="color: var(--footer-text); text-decoration: none;">Family Law</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
+                    <ul style="list-style: none; color: var(--footer-text);">
+                        <li><a href="index.html" style="color: var(--footer-text); text-decoration: none;">Home</a></li>
+                        <li><a href="about.html" style="color: var(--footer-text); text-decoration: none;">About</a></li>
+                        <li><a href="services.html" style="color: var(--footer-text); text-decoration: none;">Services</a></li>
+                        <li><a href="team.html" style="color: var(--footer-text); text-decoration: none;">Team</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--footer-text); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: var(--footer-text); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--footer-text); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Justice Law Partners. All rights reserved. | <a href="#" style="color: var(--footer-text); text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: var(--footer-text); text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
 
-            // Simulate assistant typing when chat starts
-            startChatBtn.addEventListener('click', function() {
-                // Show typing indicator
-                typingIndicator.style.display = 'flex';
-                
-                // Simulate typing delay
-                setTimeout(() => {
-                    typingIndicator.style.display = 'none';
-                    
-                    // Show welcome message in response bubble
-                    responseText.innerHTML = `<strong>Welcome!</strong> I'm Sarah, your legal assistant. I'm here to help guide you through your legal questions. What specific situation are you dealing with today?`;
-                    responseBubble.style.display = 'block';
-                    
-                    // Animate the button
-                    this.innerHTML = '<i class="fas fa-comment-dots"></i> Chat Started!';
-                    this.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
-                    
-                    // Add pulse animation to response bubble
-                    responseBubble.style.animation = 'none';
-                    setTimeout(() => {
-                        responseBubble.style.animation = 'slideUp 0.5s ease, pulse-glow 2s infinite';
-                    }, 10);
-                }, 2000);
-            });
-
-            // Quick question responses
-            const responses = {
-                accident: "After a car accident: 1) Check for injuries 2) Call police 3) Exchange information 4) Take photos 5) Don't admit fault 6) Contact us for free case review.",
-                employment: "If your employer isn't paying you: Document everything, review your contract, and contact labor board. You may have a wage claim. Let's discuss your specific situation.",
-                landlord: "For landlord issues: Document all requests, check your lease terms, know your state's tenant rights. We can help send formal demands or pursue legal action if needed.",
-                injury: "Emotional distress claims require proving severe impact on daily life. Factors include duration, medical treatment, and connection to the incident. Let's evaluate your case."
-            };
-
-            questionBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const questionType = this.getAttribute('data-question');
-                    
-                    // Show typing indicator
-                    typingIndicator.style.display = 'flex';
-                    responseBubble.style.display = 'none';
-                    
-                    // Simulate assistant thinking
-                    setTimeout(() => {
-                        typingIndicator.style.display = 'none';
-                        responseText.innerHTML = responses[questionType];
-                        responseBubble.style.display = 'block';
-                        
-                        // Scroll to response
-                        responseBubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 1500);
-                });
-            });
-
-            // Simulate online status changes
-            function simulateOnlineActivity() {
-                const statusIndicator = document.querySelector('.online-indicator');
-                const statusText = document.querySelector('.support-status span');
-                
-                // Randomly change status occasionally (95% online)
-                setInterval(() => {
-                    if (Math.random() > 0.95) {
-                        statusIndicator.style.background = '#FFC107';
-                        statusText.textContent = 'Legal assistants busy - 2 min wait';
-                    } else {
-                        statusIndicator.style.background = '#4CAF50';
-                        statusText.textContent = 'Legal assistants online now';
-                    }
-                }, 10000);
-            }
-
-            // Simulate user activity
-            function simulateUserActivity() {
-                const userAvatars = document.querySelector('.user-avatars');
-                const usersText = document.querySelector('.users-text strong');
-                
-                setInterval(() => {
-                    const userCount = 2 + Math.floor(Math.random() * 4);
-                    usersText.textContent = `${userCount} people`;
-                    
-                    // Occasionally add/remove avatar
-                    if (Math.random() > 0.7) {
-                        const avatars = userAvatars.querySelectorAll('.user-avatar');
-                        if (avatars.length > 1 && Math.random() > 0.5) {
-                            userAvatars.removeChild(avatars[avatars.length - 1]);
-                        } else if (avatars.length < 5) {
-                            const newAvatar = document.createElement('div');
-                            newAvatar.className = 'user-avatar';
-                            newAvatar.textContent = 'NL';
-                            newAvatar.style.background = `linear-gradient(135deg, #${Math.floor(Math.random()*16777215).toString(16)}, #${Math.floor(Math.random()*16777215).toString(16)})`;
-                            userAvatars.appendChild(newAvatar);
-                        }
-                    }
-                }, 8000);
-            }
-
-            // Start simulations
-            simulateOnlineActivity();
-            simulateUserActivity();
-        });
+    <script src="script/services.js">
+        
     </script>
 </body>
 </html>
