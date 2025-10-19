@@ -73,6 +73,11 @@ nav {
 .nav-links a:hover::after {
     width: 100%;
 }
+.about-btn{
+    text-decoration: none;
+    color: white;
+}
+
 
 .mobile-menu-btn {
     display: none;
